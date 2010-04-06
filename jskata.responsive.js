@@ -2,11 +2,13 @@
   var jsk = {
     sleepFor : 50, // How many milliseconds should it sleeps
     chunkSize : 10, // How many executions before sleep
-    stopped : false,
+    stopped : true,
     // A responsive for
     // Options accept "sleepFor" and "chunkSize"
     for:function(wh, inc, fct, options) {
       var that = this; // used as "this" in shouldContinue
+      
+      this.stopped = false;
       
       var sleepFor = options && options["sleepFor"] ? 
         options["sleepFor"] : this.sleepFor;
