@@ -1,21 +1,51 @@
 <html>
 <head><title>jskata</title></head>
-<script src="jskata.chunks.js"></script>
+<style>
+  #warn { color:red; }
+  #stop { display:none; }
+  #count {
+</style>
+<script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+<script src="jskata.responsive.js"></script>
 <script>
-  //for(var i  = 0; i <= 20/*Number.MAX_VALUE*/; i++) {
-  //  document.write(i + "<br />");
-  //}
+//for(var i  = 0; i <= 20/*Number.MAX_VALUE*/; i++) {
+//  document.write(i + "<br />");
+//}
+$(document).ready(function() {
+  $("#resp").click(function() {
+    var i = 0;
+    var f = jsk.responsive.for(
+      function() {return i <= Number.MAX_VALUE}, 
+      function() {i++},
+      function() {
+        $("#count").append("<span>"+i+", </span>");
+      }
+    );
+  });
   
-  var i = 0;
-  jsk.responsive.for(
-    function() {return i < 20}, 
-    function() {i++},
-    function() {
-      document.write(i + "<br />");
+  $("#nonresp").click(function() {
+    for (var i = 0; i < Number.MAX_VALUE; i++) {
+      $("#count").append("<span>"+i+", </span>");
     }
-  );
+  });
+  
+  jsk.responsive.onStart = function() {
+    $("#stop").fadeIn();
+  }
+  jsk.responsive.onStop = function() {
+    $("#stop").fadeOut();
+  }
+  
+  $("#stop").click(function() {
+    jsk.responsive.stop();
+  });
+});
 
 </script>
 <body>
+  <button id="resp">Start responsive for</button>
+  <button id="nonresp">Start non-responsive for <span id="warn">(may crash your computer)</span></button>
+  <button id="stop">Stop responsive for</button>
+  <div id="count"></div>
 </body>
 </html>
