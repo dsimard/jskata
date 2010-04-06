@@ -1,0 +1,21 @@
+<html>
+<head><title>jskata</title></head>
+<script src="jskata.chunks.js"></script>
+<script>
+  //for(var i  = 0; i <= 20/*Number.MAX_VALUE*/; i++) {
+  //  document.write(i + "<br />");
+  //}
+  
+  var i = 0;
+  jsk.responsive.for(
+    function() {return i < 20}, 
+    function() {i++},
+    function() {
+      document.write(i + "<br />");
+    }
+  );
+
+</script>
+<body>
+</body>
+</html>
