@@ -15,17 +15,13 @@ h2. Functions
 
 h3. for(wh, inc, fct, options)
 
-h4. parameters
-
 *wh* function (should return boolean)
 The while condition
 *inc* function
 The increment
 *options* hash of [sleepFor|chunkSize]
 
-h4. returns
-
-Hash of [stop]
+Returns hash of [stop]
 *stop* function
 Call this function to stop the thread
 
