@@ -1,0 +1,40 @@
+h1. jsKata.responsive
+
+h2. Properties
+
+*sleepFor : integer*
+How many milliseconds should it sleeps
+
+*chunkSize : integer*
+How many executions before sleep
+
+*stopped : boolean*
+If the execution is stopped
+
+h2. Functions
+
+h3. for(wh, inc, fct, options)
+
+*wh* function : bool
+The while condition
+*inc* function
+The increment
+*options* hash of [sleepFor|chunkSize]
+
+This function looks like the basic _for_ except that _wh_ and _inc_ are functions. Instead of 
+
+bc.. for(var i = 0; i < 1000; i++) {
+  alert(i);
+}
+
+p. you write
+
+bc.. var i = 0;
+jsk.responsive.for(
+  function() {return i < 1000}, 
+  function() {i++},
+  function() {alert(i)}
+)
+
+h2. Events
+
