@@ -52,5 +52,5 @@
     window.jskata = {};
     window.jsk = window.jskata;
   }
-  window.jskata.responsive = jsk; 
+  window.jskata.nofreeze = jsk; 
 })()
