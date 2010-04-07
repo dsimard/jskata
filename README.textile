@@ -4,7 +4,7 @@ h2. Documentation
 
 Documentation is maintained by hand. I guess there's no better way of doing it.
 
-"Go to documentation":doc/jkata.textile
+It is available in the *doc* subfolder.
 
 h2. Manifesto
 * *No internal dependence* : don't depend on a "core". Every library can be used independently "as is". Rewrite private functionalities if should.
