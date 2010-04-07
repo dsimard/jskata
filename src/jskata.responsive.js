@@ -6,6 +6,7 @@
     // A responsive for
     // Options accept "sleepFor" and "chunkSize"
     for:function for_(wh, inc, fct, options) {
+      var self = this;
       var timerId;
       
       var sleepFor = options && options["sleepFor"] ? 

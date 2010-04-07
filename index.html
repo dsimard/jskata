@@ -6,7 +6,7 @@
   #count {
 </style>
 <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
-<script src="jskata.responsive.js"></script>
+<script src="src/jskata.responsive.js"></script>
 <script>
 //for(var i  = 0; i <= 20/*Number.MAX_VALUE*/; i++) {
 //  document.write(i + "<br />");
@@ -15,7 +15,7 @@
 $(document).ready(function() {
   $("#resp").click(function() {
     var i = 0;
-    f = jsk.responsive.for(
+    var f = jsk.responsive.for(
       function() {return i <= Number.MAX_VALUE}, 
       function() {i++},
       function() {
@@ -23,7 +23,7 @@ $(document).ready(function() {
       }
     );
     
-    f2 = jsk.responsive.for(
+    var f2 = jsk.responsive.for(
       function() {return i <= Number.MAX_VALUE}, 
       function() {i++},
       function() {
@@ -34,7 +34,6 @@ $(document).ready(function() {
     $("#stop").fadeIn().click(function() {
       f.stop();
       setTimeout(f2.stop, 1000);
-      //jsk.responsive.stop();
     });
   });
   
