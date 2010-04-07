@@ -31,5 +31,11 @@ jsk.responsive.for(
   function() {alert(i)}
 )
 
-h2. Events
+h3. stop()
+
+Stop all the threads
+
+h2. Callbacks
+
+_no callbacks_
 

@@ -33,7 +33,9 @@ $(document).ready(function() {
     
     $("#stop").fadeIn().click(function() {
       f.stop();
-      setTimeout(f2.stop, 1000);
+      setTimeout(function() {
+        f2.stop(); $("#stop").fadeOut();
+       }, 1000);
     });
   });
   
@@ -42,10 +44,6 @@ $(document).ready(function() {
       $("#count").append("<span>.</span>");
     }
   });
-  
-  jsk.responsive.onStop = function() {
-    $("#stop").fadeOut();
-  }
 });
 
 </script>

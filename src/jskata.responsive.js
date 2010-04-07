@@ -44,13 +44,6 @@
         fct();
       }
       if (this.onStop) this.onStop();
-    },
-    /// EVENTS
-    onStart : function() {
-      return false;
-    },
-    onStop : function() {
-      return false;
     }
   }
 
