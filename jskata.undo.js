@@ -1,7 +1,17 @@
 (function() {
   var jsk = {
+    ///// PROPERTIES
 	  dids : [],
 	  undids : [],
+	  // Can undo
+	  canUndo : function() {
+	    return this.dids.length > 0;
+	  },
+	  // Can Redo
+	  canRedo : function() {
+	    return this.undids.length > 0;
+	  },
+	  ///// FUNCTIONS
 	  // deprecated : Push an undo function
 	  push : function(undoFunction) {
 		  this.do(null, undoFunction);
@@ -41,14 +51,6 @@
 	    }
 	    
 	    this.fireEvents();
-	  },
-	  // Can undo
-	  canUndo : function() {
-	    return this.dids.length > 0;
-	  },
-	  // Can Redo
-	  canRedo : function() {
-	    return this.undids.length > 0;
 	  },
 	  ///// EVENTS
 	  // When there's a change

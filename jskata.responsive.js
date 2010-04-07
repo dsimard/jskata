@@ -5,8 +5,8 @@
     stopped : true,
     // A responsive for
     // Options accept "sleepFor" and "chunkSize"
-    for:function(wh, inc, fct, options) {
-      var that = this; // used as "this" in shouldContinue
+    for:function for_(wh, inc, fct, options) {
+      var self = this; // used as "this" in shouldContinue
       
       this.stopped = false;
       
@@ -26,12 +26,12 @@
       // Execute a chunk of code
       var chunk = function() {
         var jskcurrent = 0;
-        while (shouldContinue.apply(that) && jskcurrent++ < chunkSize) {
+        while (shouldContinue.apply(self) && jskcurrent++ < chunkSize) {
           fct();
           inc();
         } 
         
-        if (shouldContinue.apply(that)) setTimeout(chunk, sleepFor);
+        if (shouldContinue.apply(self)) setTimeout(chunk, sleepFor);
       }
       
       // Start the thread

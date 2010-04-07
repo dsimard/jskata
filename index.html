@@ -11,14 +11,27 @@
 //for(var i  = 0; i <= 20/*Number.MAX_VALUE*/; i++) {
 //  document.write(i + "<br />");
 //}
+
 $(document).ready(function() {
   $("#resp").click(function() {
     var i = 0;
-    var f = jsk.responsive.for(
+    f = jsk.responsive.for(
       function() {return i <= Number.MAX_VALUE}, 
       function() {i++},
       function() {
-        $("#count").append("<span>"+i+", </span>");
+        $("#count").append("<span>"+"."+", </span>");
+      }
+    );
+    
+    $("#stop").click(function() {
+      f.stop();
+    });
+    
+    f2 = jsk.responsive.for(
+      function() {return i <= Number.MAX_VALUE}, 
+      function() {i++},
+      function() {
+        $("#count").append("<span>"+"|"+", </span>");
       }
     );
   });
@@ -35,10 +48,6 @@ $(document).ready(function() {
   jsk.responsive.onStop = function() {
     $("#stop").fadeOut();
   }
-  
-  $("#stop").click(function() {
-    jsk.responsive.stop();
-  });
 });
 
 </script>
