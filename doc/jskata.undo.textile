@@ -1,0 +1,48 @@
+p. The jsKata.undo library makes undo & redo management easy.
+
+h2. Properties
+
+"*(#dids)dids*":#dids as _array of functions_ 
+The actions that were done
+
+"*(#undids)undids*":#undids as  _array of functions_
+The actions that were undone
+
+"*(#canundo)canUndo()*":#canundo as _boolean_
+If there are actions to undo
+
+"*(#canredo)canRedo()*":#canredo as _boolean_
+If there are actions to redo
+
+h2. Functions
+
+h3(#do). "do":#do (doFunction as function, undoFunction as function)
+
+*doFunction* The function that makes the action wanted
+*undoFunction* The function that reverse _doFunction_
+
+The _doFunction_ is automatically called when _do_ is called. It enables the undo function.
+
+h3(#undo). "undo":#undo ()
+
+Undo the last action done via  the _do_ function.
+
+h3(#redo). "redo":#redo ()
+
+Redo the last action that was undone via  the _do_ function.
+
+h3(#push). %{color:red}deprecated% : "push":#push (undoFunction as function)
+
+*undoFunction* The function to undo
+
+Add a undo method without adding a do method.
+
+h2. Events
+
+h3(#onchange). "onChange":#onchange ()
+
+This event is raised when an action is done, undone or redone.
+
+h3(#onempty). %{color:red}deprecated% : "onEmpty":#onempty ()
+
+This event is raised when there's nothing left to redo or undo.
