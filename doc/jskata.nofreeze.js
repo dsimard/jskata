@@ -1,4 +1,6 @@
-h1. jsKata.responsive
+h1. jsKata.nofreeze
+
+p. jsKata.nofreeze avoids freezing by splitting long processes into smaller ones.
 
 h2. Properties
 

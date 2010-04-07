@@ -1,6 +1,6 @@
 h1. jsKata.undo
 
-p. The jsKata.undo library makes undo & redo management easy.
+p. jsKata.undo makes undo & redo management easy.
 
 h2. Properties
 
