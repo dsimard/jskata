@@ -1,14 +1,12 @@
 (function() {
   var jsk = {
-    sleepFor : 50, // How many milliseconds should it sleeps
+    sleepFor : 1, // How many milliseconds should it sleeps
     chunkSize : 10, // How many executions before sleep
-    stopped : true,
+    stops : [], // Contains all stop functions
     // A responsive for
     // Options accept "sleepFor" and "chunkSize"
     for:function for_(wh, inc, fct, options) {
-      var self = this; // used as "this" in shouldContinue
-      
-      this.stopped = false;
+      var timerId;
       
       var sleepFor = options && options["sleepFor"] ? 
         options["sleepFor"] : this.sleepFor;
@@ -16,33 +14,35 @@
       var chunkSize = options && options["chunkSize"] ? 
         options["chunkSize"] : this.chunkSize;
       
-      // Function to check if should stop
-      var shouldContinue = function shouldStop() {
-        var cont = !this.stopped && wh();
-        if (!cont && this.onStop && typeof this.onStop == "function") this.onStop(); 
-        return cont;
-      }
-      
       // Execute a chunk of code
-      var chunk = function() {
+      var chunk = function chunk() {
         var jskcurrent = 0;
-        while (shouldContinue.apply(self) && jskcurrent++ < chunkSize) {
+        while (wh() && jskcurrent++ < chunkSize) {
           fct();
           inc();
         } 
         
-        if (shouldContinue.apply(self)) setTimeout(chunk, sleepFor);
+        if (wh()) timerId = setTimeout(chunk, sleepFor);
       }
       
+      // Create the stop function
+      var stop = function stop() {
+        clearTimeout(timerId);
+      }
+      this.stops.push(stop);
+            
       // Start the thread
       chunk();
       if (this.onStart && typeof this.onStart == "function") this.onStart();
       
-      return this;
+      return {stop:stop};
     },
     // Stop it after the next round
     stop:function() {
-      this.stopped = true;
+      for(var i = 0, fct; fct = this.stops[i]; i++) {
+        fct();
+      }
+      if (this.onStop) this.onStop();
     },
     /// EVENTS
     onStart : function() {

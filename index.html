@@ -19,32 +19,31 @@ $(document).ready(function() {
       function() {return i <= Number.MAX_VALUE}, 
       function() {i++},
       function() {
-        $("#count").append("<span>"+"."+", </span>");
+        $("#count").append("<span>. </span>");
       }
     );
-    
-    $("#stop").click(function() {
-      f.stop();
-    });
     
     f2 = jsk.responsive.for(
       function() {return i <= Number.MAX_VALUE}, 
       function() {i++},
       function() {
-        $("#count").append("<span>"+"|"+", </span>");
+        $("#count").append("<span>| </span>");
       }
     );
+    
+    $("#stop").fadeIn().click(function() {
+      f.stop();
+      setTimeout(f2.stop, 1000);
+      //jsk.responsive.stop();
+    });
   });
   
   $("#nonresp").click(function() {
     for (var i = 0; i < Number.MAX_VALUE; i++) {
-      $("#count").append("<span>"+i+", </span>");
+      $("#count").append("<span>.</span>");
     }
   });
   
-  jsk.responsive.onStart = function() {
-    $("#stop").fadeIn();
-  }
   jsk.responsive.onStop = function() {
     $("#stop").fadeOut();
   }
