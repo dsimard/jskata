@@ -2,14 +2,10 @@ h1. jsKata.responsive
 
 h2. Properties
 
-*sleepFor : integer*
-How many milliseconds should it sleeps (default : 1)
-
-*chunkSize : integer*
-How many executions before sleep (default : 10)
-
-*stops : array of functions*
-Contains all the stop functions started in a different threads
+*sleepFor* integer (default 1) : How many milliseconds should it sleeps 
+*chunkSize* integer (default 10) : How many executions before sleep
+*stops* integer (default 10) : How many executions before sleep
+*stops* [functions] : Contains all the stop functions started in a different threads
 
 h2. Functions
 
