@@ -13,15 +13,17 @@ Contains all the stop functions started in a different threads
 
 h2. Functions
 
-h3. for(wh, inc, fct, options)
+h3. for(wh, inc, fct, options) as [stop]
 
 *wh* function (should return boolean)
 The while condition
+
 *inc* function
 The increment
-*options* hash of [sleepFor|chunkSize]
 
-Returns hash of [stop]
+*options* hash of [sleepFor|chunkSize]
+To override defaults
+
 *stop* function
 Call this function to stop the thread
 
