@@ -11,10 +11,11 @@ h2. Properties
 
 h2. Functions
 
-h3. for(wh, inc, fct, options) returns [stop]
+h3. for(wh, inc, fct, options*) returns [stop]
 
 *wh* function (should return boolean) : The while condition
-*inc* function :The increment
+*inc* function : The increment
+*fct* function : The function to execute
 *options* hash of [sleepFor|chunkSize] : To override defaults
 *stop* function : Call this function to stop the thread
 
@@ -33,9 +34,17 @@ jsk.responsive.for(
   function() {alert(i)}
 )
 
+h3. infinite(fct, options*) returns [stop]
+
+*fct* function : The function to execute
+*options* hash of [sleepFor|chunkSize] : To override defaults
+*stop* function : Call this function to stop the thread
+
+Starts an infinite loop.
+
 h3. stop()
 
-Stop all the threads
+Stop all the processes
 
 h2. Callbacks
 

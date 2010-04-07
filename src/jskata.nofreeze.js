@@ -20,7 +20,7 @@
         var jskcurrent = 0;
         while (wh() && jskcurrent++ < chunkSize) {
           fct();
-          inc();
+          if (inc) inc();
         } 
         
         if (wh()) timerId = setTimeout(chunk, sleepFor);
@@ -37,6 +37,15 @@
       if (this.onStart && typeof this.onStart == "function") this.onStart();
       
       return {stop:stop};
+    },
+    // Create an infinite loop
+    infinite:function infinite(fct, options) {
+      return this.for(
+        function() { return true; },
+        null,
+        fct,
+        options
+      )
     },
     // Stop it after the next round
     stop:function() {

@@ -35,6 +35,17 @@ $(document).ready(function() {
     });
   });
   
+  $("#infinite").click(function() {
+    jsk.nofreeze.stop();
+    var inf = jsk.nofreeze.infinite(function() {
+      $("#count").append("<span>. </span>")
+    });
+    
+    $("#stop").fadeIn().click(function() {
+      inf.stop();
+    });
+  });
+  
   $("#nonresp").click(function() {
     for (var i = 0; i < Number.MAX_VALUE; i++) {
       $("#count").append("<span>.</span>");
@@ -46,6 +57,7 @@ $(document).ready(function() {
 <body>
   <button id="resp">Start non-freezing for</button>
   <button id="nonresp">Start freezing for <span id="warn">(may crash your computer)</span></button>
+  <button id="infinite">Start infinite</button>
   <button id="stop">Stop</button>
   <div id="count"></div>
 </body>
