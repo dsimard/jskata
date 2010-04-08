@@ -7,14 +7,14 @@ Documentation is maintained by hand. I guess there's no better way of doing it.
 It is available in the *doc* subfolder.
 
 h2. Manifesto
-* *No internal dependence* : don't depend on a "core". Every library can be used independently "as is". Rewrite private functionalities if should.
-* *No external dependence* : don't depend on external library
+* *No internal dependence* : every library can be used independently "as is".
+* *No external dependence* : don't depend on external libraries.
 * *Everything is public* : when something is marked _private_ and you use it, it's because you know what you're doing
-* *Never touch the dom* : "jQuery":http://jquery.com is doing a wonderful job already
-* *Try to avoid objects* : use closures everytime I can
-* *No plugin* : if you want to rewrite add functionalities, override it
+* *Never touch the dom* : "jQuery":http://jquery.com already exists for that
 * *No unnecessary validation* : if something goes wrong, an error will pop
-* *If it exists, don't rewrite it* : if someone has already done it in a good way, don't reimplement
-* *Write good documentation* : I still have to figure out that one
-* *Promote* : A good library is nothing without users
+* *No error catching* : if an error pop, it goes all the way up
+* *Avoid objects* : use closures
+* *No plugins* : if a developer wants to add something, he will find a way around
+* *Write good documentation* : document as I code
+* *Promote* : a good library is nothing without users
 
