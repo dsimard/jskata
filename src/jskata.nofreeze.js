@@ -40,6 +40,7 @@
     },
     // Create an infinite loop
     infinite:function infinite(fct, options) {
+      alert("tes");
       return this.for(
         function() { return true; },
         null,
@@ -53,6 +54,18 @@
         fct();
       }
       if (this.onStop) this.onStop();
+    },
+    // Each
+    each:function(obj, fct, options) {
+      if (obj.length !== undefined) {
+        var i = 0;
+        return this.for(
+          function() { return i < obj.length; },
+          function() { i++; },
+          function() { fct.call(obj[i], i, obj[i]); },
+          options
+        )
+      }
     }
   }
 

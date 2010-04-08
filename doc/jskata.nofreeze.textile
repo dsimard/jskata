@@ -42,6 +42,17 @@ h3. infinite(fct, options*) returns [stop]
 
 Starts an infinite loop.
 
+h3. each(obj, fct(index, item), options*) returns [stop]
+
+*obj* array : The array to loop through. *It must be an array for the moment*
+*fct* function : The function to execute
+*index* integer : The current index of the loop
+*item* object : The current object of the loop
+*options* hash of [sleepFor|chunkSize] : To override defaults
+*stop* function : Call this function to stop the thread
+
+Loop through each of the element of an array.
+
 h3. stop()
 
 Stop all the processes

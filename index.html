@@ -5,10 +5,12 @@
   #stop { display:none; }
   #count {
 </style>
-<script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+<script src="jquery-1.3.2.js"></script>
 <script src="src/jskata.nofreeze.js"></script>
 <script>
 $(document).ready(function() {
+  $("#stop").click(function() {$(this).fadeOut();});
+
   $("#resp").click(function() {
     var i = 0;
     var f = jsk.nofreeze.for(
@@ -46,6 +48,14 @@ $(document).ready(function() {
     });
   });
   
+  $("#each").click(function() {
+    $("#count").empty();
+    var elements = $("*");
+    jsk.nofreeze.each(elements, function(index, el) {
+      $("#count").append("<span>"+$(this)+", </span>");
+    });
+  });
+  
   $("#nonresp").click(function() {
     for (var i = 0; i < Number.MAX_VALUE; i++) {
       $("#count").append("<span>.</span>");
@@ -58,6 +68,7 @@ $(document).ready(function() {
   <button id="resp">Start non-freezing for</button>
   <button id="nonresp">Start freezing for <span id="warn">(may crash your computer)</span></button>
   <button id="infinite">Start infinite</button>
+  <button id="each">Start each</button>
   <button id="stop">Stop</button>
   <div id="count"></div>
 </body>
