@@ -73,12 +73,13 @@
 	  }
   }
   
-  // Creates a namespace if not exist
-  if (window.jskata == undefined) {
-    window.jskata = {};
-    window.jsk = window.jskata;
-  }
+  // Creates the base namespace
+  window.javascriptKataDotCom = {};
+  if (window.jsKata === undefined) window.jsKata = window.javascriptKataDotCom;
+  if (window.jsk === undefined) window.jsk = window.javascriptKataDotCom;
+  if (window._ === undefined) window._ = window.javascriptKataDotCom;    
+  window.javascriptKataDotCom.undo = jsk; 
+  window.javascriptKataDotCom.u = window.javascriptKataDotCom.undo;
   
-  window.jskata.undo = jsk; 
-  window.jskataUndo = jsk; // Shortcut for backward compatibility;
+  window.jskataUndo = window.javascriptKataDotCom.undo; // Shortcut for backward compatibility;
 })()
