@@ -7,16 +7,18 @@ h2. Properties
 *sleepFor* integer (default 1) : How many milliseconds should it sleeps 
 *chunkSize* integer (default 10) : How many executions before sleep
 *stops* integer (default 10) : How many executions before sleep
-*stops* [functions] : Contains all the stop functions started in a different threads
+*stops* [functions] : Contains all the stop functions started in a different processes
 
 h2. Functions
 
-h3. for(wh, inc, fct, options*) returns [stop]
+h3. for(wh, inc, fct, options{sleepFor:integer, chunkSize:integer}) returns [stop]
 
 *wh* function (should return boolean) : The while condition
 *inc* function : The increment
 *fct* function : The function to execute
-*options* hash of [sleepFor|chunkSize] : To override defaults
+*options* hash : Options
+bq. *sleepFor* integer : How many milliseconds should it sleeps 
+bq. *chunkSize* integer : How many executions before sleep
 *stop* function : Call this function to stop the thread
 
 This function looks like the basic _for_ except that _wh_ and _inc_ are functions. Instead of 
@@ -38,7 +40,7 @@ h3. infinite(fct, options*) returns [stop]
 
 *fct* function : The function to execute
 *options* hash of [sleepFor|chunkSize] : To override defaults
-*stop* function : Call this function to stop the thread
+*stop* function : Call this function to stop the process
 
 Starts an infinite loop.
 

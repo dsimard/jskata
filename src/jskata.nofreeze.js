@@ -40,7 +40,6 @@
     },
     // Create an infinite loop
     infinite:function infinite(fct, options) {
-      alert("tes");
       return this.for(
         function() { return true; },
         null,
