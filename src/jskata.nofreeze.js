@@ -57,14 +57,28 @@
     },
     // Each
     each:function(obj, fct, options) {
-      if (obj.length !== undefined) {
+      // If it's an array
+      // taken from jQuery
+      if (toString.call(obj) == "[object Array]") {
         var i = 0;
         return this.for(
           function() { return i < obj.length; },
           function() { i++; },
           function() { fct.call(obj[i], i, obj[i]); },
           options
-        )
+        );
+      // If it's an an object
+      } else {
+        // Create an array of properties
+        var props = [];
+        for(var prop in obj) { props.push(prop); }
+        var i = 0;
+        return this.for(
+          function() { return i < props.length; },
+          function() { i++; },
+          function() { fct.call(obj[props[i]], props[i], obj[props[i]]);},
+          options
+        );
       }
     }
   }
