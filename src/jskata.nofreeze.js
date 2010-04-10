@@ -4,8 +4,7 @@
     chunkSize : 10, // How many executions before sleep
     stops : [], // Contains all stop functions
     // A responsive for
-    // Options accept "sleepFor" and "chunkSize"
-    for:function for_(wh, inc, fct, options) {
+    for:function for_(wh, inc, fct, options, stopCallback) {
       var self = this;
       var timerId;
       
@@ -14,6 +13,17 @@
         
       var chunkSize = options && options["chunkSize"] ? 
         options["chunkSize"] : this.chunkSize;
+        
+      // Create the stop function
+      var innerStop = function innerStop() {
+        if (stopCallback) stopCallback();
+        clearTimeout(timerId);
+      }
+      var stop = function stopWrapper() {
+        if (innerStop) innerStop();
+        innerStop = null;
+      };
+      self.stops.push(stop);
       
       // Execute a chunk of code
       var chunk = function chunk() {
@@ -23,39 +33,30 @@
           if (inc) inc();
         } 
         
-        if (wh()) timerId = setTimeout(chunk, sleepFor);
+        if (wh()) { 
+          timerId = setTimeout(chunk, sleepFor);
+        } else {
+          stop();
+        }
       }
-      
-      // Create the stop function
-      var stop = function stop() {
-        clearTimeout(timerId);
-      }
-      this.stops.push(stop);
             
-      // Start the thread
+      // Start the process
       chunk();
-      if (this.onStart && typeof this.onStart == "function") this.onStart();
       
       return {stop:stop};
     },
     // Create an infinite loop
-    infinite:function infinite(fct, options) {
+    infinite:function infinite(fct, options, stopCallback) {
       return this.for(
         function() { return true; },
         null,
         fct,
-        options
+        options,
+        stopCallback
       )
     },
-    // Stop it after the next round
-    stop:function() {
-      for(var i = 0, fct; fct = this.stops[i]; i++) {
-        fct();
-      }
-      if (this.onStop) this.onStop();
-    },
     // Each
-    each:function(obj, fct, options) {
+    each:function(obj, fct, options, stopCallback) {
       // If it's an array
       // taken from jQuery
       if (toString.call(obj) == "[object Array]") {
@@ -64,7 +65,8 @@
           function() { return i < obj.length; },
           function() { i++; },
           function() { fct.call(obj[i], i, obj[i]); },
-          options
+          options,
+          stopCallback
         );
       // If it's an an object
       } else {
@@ -76,9 +78,17 @@
           function() { return i < props.length; },
           function() { i++; },
           function() { fct.call(obj[props[i]], props[i], obj[props[i]]);},
-          options
+          options,
+          stopCallback
         );
       }
+    },
+    // Stop it after the next round
+    stop:function() {
+      for(var i = 0, fct; fct = this.stops[i]; i++) {
+        fct();
+      }
+      if (this.onStop) this.onStop();
     }
   }
 
