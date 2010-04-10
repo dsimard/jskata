@@ -17,8 +17,8 @@ h3. for(wh, inc, fct, options{sleepFor:integer, chunkSize:integer}) returns [sto
 *inc* function : The increment
 *fct* function : The function to execute
 *options* hash : Options
-bq. *sleepFor* integer : How many milliseconds should it sleeps 
-bq. *chunkSize* integer : How many executions before sleep
+bq.*sleepFor* integer : How many milliseconds should it sleeps 
+bq.*chunkSize* integer : How many executions before sleep
 *stop* function : Call this function to stop the thread
 
 This function looks like the basic _for_ except that _wh_ and _inc_ are functions. Instead of 
