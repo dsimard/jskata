@@ -2,7 +2,7 @@
                     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="../jquery-1.3.2.js"></script>
   <link rel="stylesheet" href="qunit.css" type="text/css" media="screen" />
   <script type="text/javascript" src="qunit.js"></script>
   <script type="text/javascript" src="../src/jskata.nofreeze.js"></script>
@@ -12,6 +12,43 @@ $(document).ready(function(){
   test("test namespace", function() {
     ok(_.nf !== undefined);
     ok(javascriptKataDotCom.nofreeze !== undefined);
+  });
+  
+  test("array", function() {
+    var array = [1,2,3];
+    var array2 = [];
+    var check = function check() {
+      for(i in array) {
+        equal(array[i], array[i]);
+      };
+    };
+    
+    _.nf.each(array, function(i, val) {
+      array2.push(val);
+    }, null, check);
+  });
+  
+  test("for", function() {
+    var count = 0;
+    var i = 0;
+    
+    var check = function check() {
+      equal(count, 100);
+    }
+
+    _.nf.for(
+      function() { return i < 100; },
+      function() { i++; },
+      function fct() {
+        count++;
+      },
+      {},
+      function() {
+        console.log("onstop", count);
+        check();
+        equal(count, 2);
+      }
+    );
   });
 });
 </script>

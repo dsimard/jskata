@@ -13,6 +13,20 @@ $(document).ready(function() {
 
   $("#resp").click(function() {
     var i = 0;
+    jsk.nofreeze.for(
+      function() { i < 100; console.log("if", i); },
+      function() { console.log("inv", i); i++; console.log("after", i);},
+      function fct() {
+        console.log("after", i);
+      },
+      null,
+      function() {
+        console.log("obj", i);
+      }
+    );
+    return;
+    
+    var i = 0;
     var f = jsk.nofreeze.for(
       function() {return i < 10}, 
       function() {i++;},
