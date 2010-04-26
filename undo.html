@@ -4,12 +4,15 @@
 <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
 <script src="http://github.com/dsimard/jskata/raw/v0.1/src/jskata.undo.js"></script>
 <style>
-#undo, #redo {
-	display:none;
-}
+  #undo[disabled], #redo[disabled] {
+    border:1px solid #bbb;
+  }
 </style>
 <script>
 $(document).ready(function() {
+  // Disabled
+  $("#undo, #redo").attr("disabled", true);
+
 	// Show a log of action
 	var logAction = function(msg) {
 		$("#actions").append(
@@ -19,18 +22,11 @@ $(document).ready(function() {
 
 	// Show the undo button when there's a new undo
 	jskataUndo.onChange = function() {
-		if (jsk.undo.canUndo()) $("#undo").fadeIn(); else $("#undo").fadeOut();
-		if (jsk.undo.canRedo()) $("#redo").fadeIn(); else $("#redo").fadeOut();
-	};
-	
-	// When the undo is empty
-	jskataUndo.onUndoEmpty = function() {
-		$("#undo").fadeOut();
-	};
-	
-	// When the undo is empty
-	jskataUndo.onRedoEmpty = function() {
-		$("#redo").fadeOut();
+		if (jsk.undo.canUndo()) $("#undo").attr("disabled", false) 
+		  else $("#undo").attr("disabled", true);
+		  
+		if (jsk.undo.canRedo()) $("#redo").attr("disabled", false) 
+		  else $("#redo").attr("disabled", true);
 	};
 	
 	// Undo/redo is clicked
@@ -71,7 +67,8 @@ $(document).ready(function() {
 </head>
 <body>
 	<h1>jskataUndo</h1>
-	<button id="undo">Undo</button><button id="redo">Redo</button>
+	<input type="button" id="undo" disabled="true" value="Undo" />
+	<input type="button" id="redo"  disabled="true" value="Redo" />
 	<br /><br />
 	<input type="text" id="user" /><button id="addUser">add user</button>
 	<br />
