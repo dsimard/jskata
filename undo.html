@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>jskataUndo</title>
+<script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+<script src="http://github.com/dsimard/jskata/raw/v0.1/src/jskata.undo.js"></script>
+<style>
+#undo, #redo {
+	display:none;
+}
+</style>
+<script>
+$(document).ready(function() {
+	// Show a log of action
+	var logAction = function(msg) {
+		$("#actions").append(
+			$("<li>").html(msg)
+		);
+	}
+
+	// Show the undo button when there's a new undo
+	jskataUndo.onChange = function() {
+		if (jsk.undo.canUndo()) $("#undo").fadeIn(); else $("#undo").fadeOut();
+		if (jsk.undo.canRedo()) $("#redo").fadeIn(); else $("#redo").fadeOut();
+	};
+	
+	// When the undo is empty
+	jskataUndo.onUndoEmpty = function() {
+		$("#undo").fadeOut();
+	};
+	
+	// When the undo is empty
+	jskataUndo.onRedoEmpty = function() {
+		$("#redo").fadeOut();
+	};
+	
+	// Undo/redo is clicked
+	$("#undo").click(function() {
+		jskataUndo.undo();
+	});
+	
+	$("#redo").click(function() {
+		jsk.undo.redo();
+	});
+	
+	// Add user
+	$("#addUser").click(function() {
+		var user = $("#user").val();
+		if (!user) user = "[empty]";
+		jsk.undo.do(function() {
+		    logAction("Added user <strong>" + user + "</strong>")
+		  },
+		  function() {
+	      logAction("<span style='color:red'>[undo]</span>" + 
+				      "Removed user <strong>" + user + "<strong>");
+		  });
+	});
+	
+	// Add project
+	$("#addProject").click(function() {
+		var project = $("#project").val();
+		if (project == "") project = "[empty]";
+		jsk.undo.do(function() {
+		  logAction("Added project <strong>" + project + "</strong>")
+		}, function() {
+			logAction("<span style='color:red'>[undo]</span>" + 
+				"Removed project <strong>" + project + "</strong>")
+		});
+	});
+});
+</script>
+</head>
+<body>
+	<h1>jskataUndo</h1>
+	<button id="undo">Undo</button><button id="redo">Redo</button>
+	<br /><br />
+	<input type="text" id="user" /><button id="addUser">add user</button>
+	<br />
+	<input type="text" id="project" /><button id="addProject">add project</button>
+	<br />
+	<h3>Actions</h3>
+	<ul id="actions" />
+</body>
+</html>
+
