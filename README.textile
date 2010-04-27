@@ -1,5 +1,9 @@
 h1. jsKata
 
+*independent javascript library*
+
+p. "official site":http://dsimard.github.com/jskata - "twitter":http://twitter.com/jskata - "dsimard@azanka.ca":mailto:dsimard@azanka.ca
+
 h2. Documentation
 
 Documentation is maintained by hand. I guess there's no better way of doing it.
