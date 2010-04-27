@@ -14,7 +14,7 @@
 	  ///// FUNCTIONS
 	  // deprecated : Push an undo function
 	  push : function(undoFunction) {
-		  this.do(null, undoFunction);
+		  this.execute(null, undoFunction);
 	  },
 	  // Do something that can be undone
 	  execute : function(doFunction, undoFunction) {
@@ -23,7 +23,7 @@
   	    this.undids = [];
   	  }
   	  
-  	  this.dids.push({do:doFunction, undo:undoFunction});
+  	  this.dids.push({redo:doFunction, undo:undoFunction});
   	  
       this.fireEvents();
 	  },
@@ -34,8 +34,8 @@
 		    fct["undo"]();
 		    
 		    // There can be no "do" so don't push a redo
-		    if (this.isFct(fct["do"]))
-	        this.undids.push({do:fct["do"], undo:fct["undo"]});
+		    if (this.isFct(fct["redo"]))
+	        this.undids.push({redo:fct["redo"], undo:fct["undo"]});
 		  }
 	  	
 	  	this.fireEvents();
@@ -43,11 +43,11 @@
 	  // Redo
 	  redo : function() {
 	    var fct = this.undids && this.undids.length > 0 ? this.undids.pop() : null;
-	    if (this.isFct(fct["do"])) {
-	      fct["do"]();
+	    if (this.isFct(fct["redo"])) {
+	      fct["redo"]();
 	      
 	      // Put the redo in dids
-	      this.dids.push({do:fct["do"],undo:fct["undo"]});
+	      this.dids.push({redo:fct["redo"],undo:fct["undo"]});
 	    }
 	    
 	    this.fireEvents();
