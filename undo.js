@@ -31,7 +31,7 @@ $(document).ready(function() {
 	$("#addUser").click(function() {
 		var user = $("#user").val();
 		if (!user) user = "[empty]";
-		jsk.undo.do(function() {
+		jsk.undo.execute(function() {
 		    logAction("Added user <strong>" + user + "</strong>")
 		  },
 		  function() {
@@ -44,7 +44,7 @@ $(document).ready(function() {
 	$("#addProject").click(function() {
 		var project = $("#project").val();
 		if (project == "") project = "[empty]";
-		jsk.undo.do(function() {
+		jsk.undo.execute(function() {
 		  logAction("Added project <strong>" + project + "</strong>")
 		}, function() {
 			logAction("<span style='color:red'>[undo]</span>" + 
