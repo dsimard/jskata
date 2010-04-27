@@ -38,6 +38,27 @@ test("basic test", function() {
   equal(_.u.undids.length, 0)
 });
 
+test("onChange", function() {
+  var called = 0;
+  jsk.undo.onChange = function() {
+    called++;
+  }
+  
+  jsk.undo.execute(function() {}, function() {});
+  equal(1, called, "called 1 time");
+  
+  jsk.undo.undo();
+  equal(2, called, "called 2 times");
+  
+  jsk.undo.redo();
+  equal(3, called, "called 3 times");
+  
+  jsk.undo.onChange = null;
+  
+  jsk.undo.undo();
+  equal(3, called, "called 3 times (the event is now null)");
+});
+
 });
 </script>
 </head>
