@@ -11,12 +11,12 @@ h2. Properties
 
 h2. Functions
 
-h3. do(doFunction, undoFunction)
+h3. execute(doFunction, undoFunction)
 
 *doFunction* function : The function that makes the action wanted
 *undoFunction* function : The function that reverse _doFunction_
 
-The _doFunction_ is automatically called when _do_ is called. It enables the undo function.
+The _doFunction_ is automatically called when _execute_ is called. It enables the undo function.
 
 h3. undo()
 

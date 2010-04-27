@@ -17,7 +17,7 @@
 		  this.do(null, undoFunction);
 	  },
 	  // Do something that can be undone
-	  do : function(doFunction, undoFunction) {
+	  execute : function(doFunction, undoFunction) {
 	    if (this.isFct(doFunction)) { 
 	      doFunction();
   	    this.undids = [];
