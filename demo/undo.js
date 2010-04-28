@@ -47,16 +47,38 @@ $(document).ready(function() {
 		  });
 	});
 	
-	// Add project
+	// Add project with jsonp
 	$("#addProject").click(function() {
-		var project = $("#project").val();
-		if (project == "") project = "[empty]";
-		jsk.undo.execute(function() {
-		  logAction("Added project <strong>" + project + "</strong>")
-		}, function() {
-			logAction("<span style='color:red'>[undo]</span>" + 
-				"Removed project <strong>" + project + "</strong>")
-		});
+    var ajaxRequest = function ajaxRequest() {  
+    
+      var project = $("#project").val();
+      if (!project) project = "[empty]";
+
+      var result = {};
+     
+      $.ajax(
+        {
+          url:"./undo.project.json", 
+          success: function(data) {
+            result["hi"] = data;
+            logAction("Added project <strong>" + project + 
+              " (id:" + data.id.toString() + ")</strong>");
+          },
+          dataType:"json",
+        }
+      );
+      
+      return result;
+    };
+
+    _.u.execute(ajaxRequest,
+      function(data) { console.log(data); }
+	  );
 	});
-});
+	
+	
+
+	
+}); // document.ready
+
 

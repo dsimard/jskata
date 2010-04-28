@@ -39,7 +39,7 @@
 	  undo : function undo() {
 		  var fct = this.dids && this.dids.length > 0 ? this.dids.pop() : null;
 		  if (this.isFct(fct["wrappedUndo"])) {
-		    var data = fct["wrappedUndo"]();
+		    fct["wrappedUndo"]();
 		    
 		    // There can be no "do" so don't push a redo
 		    if (this.isFct(fct["redo"]))
