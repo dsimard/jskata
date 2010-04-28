@@ -59,6 +59,25 @@ test("onChange", function() {
   equal(3, called, "called 3 times (the event is now null)");
 });
 
+test("data from execution is passed to undo", function() {
+  var rnd = 0;
+  
+  jsk.u.execute(function() {
+    rnd = Math.round(Math.random()*9999999);
+    return rnd;
+  }, function(data) {
+    equal(data, rnd, "randoms are the same");
+  });
+  
+  var oldRnd = rnd;
+  jsk.u.undo();
+  jsk.u.redo();
+  
+  ok(oldRnd != rnd, "rnd has changed");
+  
+  jsk.u.undo();  
+  
+  });
 });
 </script>
 </head>

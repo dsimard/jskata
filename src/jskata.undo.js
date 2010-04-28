@@ -17,21 +17,29 @@
 		  this.execute(null, undoFunction);
 	  },
 	  // Do something that can be undone
-	  execute : function(doFunction, undoFunction) {
+	  execute : function execute(doFunction, undoFunction) {
+	    var data = null;
+	    
 	    if (this.isFct(doFunction)) { 
-	      doFunction();
+	      data = doFunction();
   	    this.undids = [];
   	  }
   	  
-  	  this.dids.push({redo:doFunction, undo:undoFunction});
+  	  // Create a new undo and pass what the do returned
+  	  var wrappedUndo = function wrappedUndo() {
+  	    undoFunction(data);
+  	  }
+  	  
+  	  this.dids.push({redo:doFunction, undo:undoFunction, 
+  	    wrappedUndo:wrappedUndo});
   	  
       this.fireEvents();
 	  },
 	  // Undo
-	  undo : function() {
+	  undo : function undo() {
 		  var fct = this.dids && this.dids.length > 0 ? this.dids.pop() : null;
-		  if (this.isFct(fct["undo"])) {
-		    fct["undo"]();
+		  if (this.isFct(fct["wrappedUndo"])) {
+		    var data = fct["wrappedUndo"]();
 		    
 		    // There can be no "do" so don't push a redo
 		    if (this.isFct(fct["redo"]))
@@ -41,13 +49,18 @@
 	  	this.fireEvents();
 	  },
 	  // Redo
-	  redo : function() {
+	  redo : function redo() {
 	    var fct = this.undids && this.undids.length > 0 ? this.undids.pop() : null;
 	    if (this.isFct(fct["redo"])) {
-	      fct["redo"]();
+	      var data = fct["redo"]();
+	      
+	      var wrappedUndo = function wrappedUndo() {
+	        fct["undo"](data);
+	      }
 	      
 	      // Put the redo in dids
-	      this.dids.push({redo:fct["redo"],undo:fct["undo"]});
+	      this.dids.push({redo:fct["redo"],undo:fct["undo"],
+	        wrappedUndo:wrappedUndo});
 	    }
 	    
 	    this.fireEvents();

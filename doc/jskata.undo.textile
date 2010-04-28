@@ -18,7 +18,9 @@ h3. execute(doFunction, undoFunction)
 
 The _doFunction_ is automatically called when _execute_ is called. It enables the undo function.
 
-h3. undo()
+h3. undo(data)
+
+*data* object : The data returned by the execution
 
 Undo the last action done via  the _do_ function.
 

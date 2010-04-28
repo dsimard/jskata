@@ -32,11 +32,18 @@ $(document).ready(function() {
 		var user = $("#user").val();
 		if (!user) user = "[empty]";
 		jsk.undo.execute(function() {
-		    logAction("Added user <strong>" + user + "</strong>")
+        var fakeId = Math.round((Math.random()*1000))+1;
+        
+		    logAction("Added user <strong>" + user + 
+		      " (id:" + fakeId.toString() + ")</strong>");
+		      
+		    return {id:fakeId}; // Return a fake ID
 		  },
-		  function() {
+		  function undo(data) {
+		    console.log("in", data)
 	      logAction("<span style='color:red'>[undo]</span>" + 
-				      "Removed user <strong>" + user + "<strong>");
+				  "Removed user <strong>" + user + 
+				  " (id:" + data.id.toString() + ")<strong>");
 		  });
 	});
 	
