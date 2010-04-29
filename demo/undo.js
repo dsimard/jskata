@@ -49,31 +49,43 @@ $(document).ready(function() {
 	
 	// Add project with jsonp
 	$("#addProject").click(function() {
-    var ajaxRequest = function ajaxRequest() {  
-    
+	  var removeProject = function removeProject_(data) {
+	    $.get("./undo.project.json", function success() {
+	      logAction("<span style='color:red'>[undo]</span>" + 
+				  "Removed project <strong>" + data.name + 
+				  " (id:" + data.id + ")<strong>");
+	    })
+	  }
+	
+    var createProject = function createProject_() {  
       var project = $("#project").val();
       if (!project) project = "[empty]";
-
-      var result = {};
+     
+      var result;
      
       $.ajax(
         {
           url:"./undo.project.json", 
-          success: function(data) {
-            result["hi"] = data;
-            logAction("Added project <strong>" + project + 
+          success: function success(data) {
+            // Create data
+            data.name = project;
+            data.id = Math.round(Math.random()*999);
+          
+            logAction("Added project <strong>" + data.name + 
               " (id:" + data.id.toString() + ")</strong>");
+
+            _.u.execute(createProject,
+                function undo() { removeProject(data); },
+                {async:true}
+
+              );
           },
           dataType:"json",
         }
       );
-      
-      return result;
     };
-
-    _.u.execute(ajaxRequest,
-      function(data) { console.log(data); }
-	  );
+    
+    createProject();
 	});
 	
 	

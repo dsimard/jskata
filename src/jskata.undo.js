@@ -17,10 +17,12 @@
 		  this.execute(null, undoFunction);
 	  },
 	  // Do something that can be undone
-	  execute : function execute(doFunction, undoFunction) {
-	    var data = null;
+	  execute : function execute(doFunction, undoFunction, options) {
+	    var data;
 	    
-	    if (this.isFct(doFunction)) { 
+	    if (options == null) options = {};
+	    
+	    if (this.isFct(doFunction) && options["async"] !== true) { 
 	      data = doFunction();
   	    this.undids = [];
   	  }
@@ -34,6 +36,8 @@
   	    wrappedUndo:wrappedUndo});
   	  
       this.fireEvents();
+      
+      return data;
 	  },
 	  // Undo
 	  undo : function undo() {
