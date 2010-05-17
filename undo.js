@@ -32,23 +32,69 @@ $(document).ready(function() {
 		var user = $("#user").val();
 		if (!user) user = "[empty]";
 		jsk.undo.execute(function() {
-		    logAction("Added user <strong>" + user + "</strong>")
+        var fakeId = Math.round((Math.random()*1000))+1;
+        
+		    logAction("Added user <strong>" + user + 
+		      " (id:" + fakeId.toString() + ")</strong>");
+		      
+		    return {id:fakeId}; // Return a fake ID
 		  },
-		  function() {
+		  function undo(data) {
 	      logAction("<span style='color:red'>[undo]</span>" + 
-				      "Removed user <strong>" + user + "<strong>");
+				  "Removed user <strong>" + user + 
+				  " (id:" + data.id.toString() + ")<strong>");
 		  });
 	});
 	
-	// Add project
+	///// PROJECT //////
+  var removeProject = function removeProject(d) {
+    $.get("./undo.project.json", function success() {
+      logAction("<span style='color:red'>[undo]</span>" + 
+        "Removed project <strong>" + d.name + 
+        " (id:" + d.id + ")<strong>");
+    });
+  }
+	
+	// Add project with jsonp
 	$("#addProject").click(function() {
-		var project = $("#project").val();
-		if (project == "") project = "[empty]";
-		jsk.undo.execute(function() {
-		  logAction("Added project <strong>" + project + "</strong>")
-		}, function() {
-			logAction("<span style='color:red'>[undo]</span>" + 
-				"Removed project <strong>" + project + "</strong>")
-		});
+    var project = $("#project").val();
+    if (!project || project === undefined) project = "[empty]";
+	
+    var addProject = function addProject() { 
+      $.get("./undo.project.json", {}, function success(data) {
+        // Fake data
+        data.id = Math.round((Math.random()*1000));
+        data.name = project;
+      
+        jsKata.undo.execute(addProject, removeProject, {async:true, data:data});
+      
+        logAction("Added project <strong>" + data.name + 
+          " (id:" + data.id.toString() + ")</strong>");
+      }, "json");
+    }
+    
+    addProject();
 	});
-});
+	
+	//
+	$("#addAsync").click(function() {
+	  var add = function() {
+	    $.get("./undo.project.json", {}, function success(data) {
+	      data.id = Math.round((Math.random()*1000));
+	      
+	      console.log("DO", data.id);
+	      var del = function del() {
+	        console.log("UNDO", data.id);
+	      }
+	    
+        var cb = _.u.execute(add, del, {async:true});
+	    }, "json");
+	  };
+	  
+	  add();
+	});
+	
+}); // document.ready
+
+
+
