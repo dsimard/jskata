@@ -18,7 +18,7 @@
 	  },
 	  // Do something that can be undone
 	  execute : function execute(doFunction, undoFunction, options) {
-	    // If in async, it will not rexecute the do when calling redo
+	    // If in async, it will not execute the do when calling redo
 	    // (see redoFunction)
 	    var data;
 	    
@@ -26,8 +26,17 @@
 	    
 	    if (this.isFct(doFunction) && options["async"] !== true) { 
 	      data = doFunction();
-  	    this.undids = [];
   	  }
+  	  
+  	  // This causes me problem on async
+  	  // TODO : This is not thread safe but I didn't find yet how to do it
+  	  if (jsk.isInAsyncRedo !== true) {
+    	  this.undids = [];
+    	}    	
+    	jsk.isInAsyncRedo = false; 
+    	
+      // If there's data in options, use them
+      if (options["data"]) data = options["data"];
   	  
   	  // Create a new undo and pass what the do returned
   	  var wrappedUndo = function wrappedUndo() {
@@ -35,7 +44,7 @@
   	  }
   	    	  
   	  this.dids.push({redo:doFunction, undo:undoFunction, 
-  	    wrappedUndo:wrappedUndo});
+  	    wrappedUndo:wrappedUndo, options:options});
   	  
       this.fireEvents();
       
@@ -49,7 +58,8 @@
 		    
 		    // There can be no "do" so don't push a redo
 		    if (this.isFct(fct["redo"]))
-	        this.undids.push({redo:fct["redo"], undo:fct["undo"]});
+	        this.undids.push({redo:fct["redo"], undo:fct["undo"], 
+	        options : fct["options"]});
 		  }
 	  	
 	  	this.fireEvents();
@@ -58,15 +68,21 @@
 	  redo : function redo() {
 	    var fct = this.undids && this.undids.length > 0 ? this.undids.pop() : null;
 	    if (this.isFct(fct["redo"])) {
+	      jsk.isInAsyncRedo = fct["options"]["async"];
 	      var data = fct["redo"]();
+	      
+	      // If there's data in options, use them
+	      if (fct["options"]["data"]) data = fct["options"]["data"];
 	      
 	      var wrappedUndo = function wrappedUndo() {
 	        fct["undo"](data);
 	      }
 	      
 	      // Put the redo in dids (if in async, skip this)
-	      this.dids.push({redo:fct["redo"],undo:fct["undo"],
-	        wrappedUndo:wrappedUndo});
+	      if (fct["options"]["async"] !== true) {
+	        this.dids.push({redo:fct["redo"],undo:fct["undo"],
+	          wrappedUndo:wrappedUndo, options:fct["options"]});
+	      }
 	    }
 	    
 	    this.fireEvents();
@@ -80,7 +96,7 @@
 	  onEmpty : function() {
 		  return false;
 	  },
-	  /// PRIVATE
+	  ///// PRIVATE
 	  // fired when something changes
 	  fireEvents : function() {
 		  if (this.onChange) this.onChange();
@@ -99,6 +115,7 @@
   if (window._ === undefined) window._ = window.javascriptKataDotCom;    
   window.javascriptKataDotCom.undo = jsk; 
   window.javascriptKataDotCom.u = window.javascriptKataDotCom.undo;
-  
-  window.jskataUndo = window.javascriptKataDotCom.undo; // Shortcut for backward compatibility;
+
+  // Shortcut for backward compatibility
+  window.jskataUndo = window.javascriptKataDotCom.undo; 
 })()

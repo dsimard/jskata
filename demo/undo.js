@@ -47,39 +47,33 @@ $(document).ready(function() {
 	});
 	
 	///// PROJECT //////
-	// Make the async call
-  var createProject = function createProject_() {  
-    var project = $("#project").val();
-    if (!project || project === undefined) project = "[empty]";
-    
-    // Success of the async call
-    var success = function success(data) {
-      // Create data (for test only)
-      data.name = project; 
-      data.id = Math.round(Math.random()*999);
-      result = data;
-    
-      logAction("Added project <strong>" + data.name + 
-        " (id:" + data.id.toString() + ")</strong>");
-        
-      var cb = _.u.asyncExecute(createProject);
-
-      var removeProject = function removeProject_(data) {
-        $.get("./undo.project.json", function success() {
-          logAction("<span style='color:red'>[undo]</span>" + 
-	          "Removed project <strong>" + result.name + 
-	          " (id:" + data.id + ")<strong>");
-        });
-      };
-      
-      
-    }
-
-  };
+  var removeProject = function removeProject(d) {
+    $.get("./undo.project.json", function success() {
+      logAction("<span style='color:red'>[undo]</span>" + 
+        "Removed project <strong>" + d.name + 
+        " (id:" + d.id + ")<strong>");
+    });
+  }
 	
 	// Add project with jsonp
 	$("#addProject").click(function() {
-    createProject();
+    var project = $("#project").val();
+    if (!project || project === undefined) project = "[empty]";
+	
+    var addProject = function addProject() { 
+      $.get("./undo.project.json", {}, function success(data) {
+        // Fake data
+        data.id = Math.round((Math.random()*1000));
+        data.name = project;
+      
+        jsKata.undo.execute(addProject, removeProject, {async:true, data:data});
+      
+        logAction("Added project <strong>" + data.name + 
+          " (id:" + data.id.toString() + ")</strong>");
+      }, "json");
+    }
+    
+    addProject();
 	});
 	
 	//
