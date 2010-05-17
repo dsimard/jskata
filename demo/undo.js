@@ -40,56 +40,65 @@ $(document).ready(function() {
 		    return {id:fakeId}; // Return a fake ID
 		  },
 		  function undo(data) {
-		    console.log("in", data)
 	      logAction("<span style='color:red'>[undo]</span>" + 
 				  "Removed user <strong>" + user + 
 				  " (id:" + data.id.toString() + ")<strong>");
 		  });
 	});
 	
+	///// PROJECT //////
+	// Make the async call
+  var createProject = function createProject_() {  
+    var project = $("#project").val();
+    if (!project || project === undefined) project = "[empty]";
+    
+    // Success of the async call
+    var success = function success(data) {
+      // Create data (for test only)
+      data.name = project; 
+      data.id = Math.round(Math.random()*999);
+      result = data;
+    
+      logAction("Added project <strong>" + data.name + 
+        " (id:" + data.id.toString() + ")</strong>");
+        
+      var cb = _.u.asyncExecute(createProject);
+
+      var removeProject = function removeProject_(data) {
+        $.get("./undo.project.json", function success() {
+          logAction("<span style='color:red'>[undo]</span>" + 
+	          "Removed project <strong>" + result.name + 
+	          " (id:" + data.id + ")<strong>");
+        });
+      };
+      
+      
+    }
+
+  };
+	
 	// Add project with jsonp
 	$("#addProject").click(function() {
-	  var removeProject = function removeProject_(data) {
-	    $.get("./undo.project.json", function success() {
-	      logAction("<span style='color:red'>[undo]</span>" + 
-				  "Removed project <strong>" + data.name + 
-				  " (id:" + data.id + ")<strong>");
-	    })
-	  }
-	
-    var createProject = function createProject_() {  
-      var project = $("#project").val();
-      if (!project) project = "[empty]";
-     
-      var result;
-     
-      $.ajax(
-        {
-          url:"./undo.project.json", 
-          success: function success(data) {
-            // Create data
-            data.name = project;
-            data.id = Math.round(Math.random()*999);
-          
-            logAction("Added project <strong>" + data.name + 
-              " (id:" + data.id.toString() + ")</strong>");
-
-            _.u.execute(createProject,
-                function undo() { removeProject(data); },
-                {async:true}
-
-              );
-          },
-          dataType:"json",
-        }
-      );
-    };
-    
     createProject();
 	});
 	
-	
-
+	//
+	$("#addAsync").click(function() {
+	  var add = function() {
+	    $.get("./undo.project.json", {}, function success(data) {
+	      data.id = Math.round((Math.random()*1000));
+	      
+	      console.log("DO", data.id);
+	      var del = function del() {
+	        console.log("UNDO", data.id);
+	      }
+	    
+        var cb = _.u.execute(add, del, {async:true});
+	    }, "json");
+	  };
+	  
+	  add();
+	});
 	
 }); // document.ready
 

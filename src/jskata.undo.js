@@ -18,6 +18,8 @@
 	  },
 	  // Do something that can be undone
 	  execute : function execute(doFunction, undoFunction, options) {
+	    // If in async, it will not rexecute the do when calling redo
+	    // (see redoFunction)
 	    var data;
 	    
 	    if (options == null) options = {};
@@ -31,7 +33,7 @@
   	  var wrappedUndo = function wrappedUndo() {
   	    undoFunction(data);
   	  }
-  	  
+  	    	  
   	  this.dids.push({redo:doFunction, undo:undoFunction, 
   	    wrappedUndo:wrappedUndo});
   	  
@@ -62,7 +64,7 @@
 	        fct["undo"](data);
 	      }
 	      
-	      // Put the redo in dids
+	      // Put the redo in dids (if in async, skip this)
 	      this.dids.push({redo:fct["redo"],undo:fct["undo"],
 	        wrappedUndo:wrappedUndo});
 	    }
