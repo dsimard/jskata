@@ -1,0 +1,96 @@
+<html>
+<head><title>jskata</title></head>
+<style>
+  #warn { color:red; }
+  #stop { display:none; }
+  #count {
+</style>
+<script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+<script src="http://github.com/dsimard/jskata/raw/v0.2/src/jskata.nofreeze.js"></script>
+<script>
+$(document).ready(function() {
+  $("#stop").click(function() {$(this).fadeOut();});
+
+  $("#resp").click(function() {
+    var i = 0;
+    jsk.nofreeze.for(
+      function() { return i < 1000;  },
+      function() { i++; },
+      function fct() {
+        $("#count").append("<span>. </span>");
+      },
+      null,
+      function() {
+        $("#count").append("<span>stopped</span>");
+      }
+    );
+    return;
+    
+    var i = 0;
+    var f = jsk.nofreeze.for(
+      function() {return i < 10}, 
+      function() {i++;},
+      function() {
+        $("#count").append("<span>. </span>");
+      },
+      null,
+      function() {
+      }
+    );
+    
+    var j = 0;
+    var f2 = jsk.nofreeze.for(
+      function() {return j <= Number.MAX_VALUE}, 
+      function() {j++},
+      function() {
+        $("#count").append("<span>| </span>");
+      },
+      null,
+      function() {
+        $("#count").append("<span>stopped</span>");
+      }
+    );
+    
+    $("#stop").fadeIn().click(function() {
+      f.stop();
+      setTimeout(function() {
+        f2.stop(); $("#stop").fadeOut();
+       }, 1000);
+    });
+  });
+  
+  $("#infinite").click(function() {
+    jsk.nofreeze.stop();
+    var inf = jsk.nofreeze.infinite(function() {
+      $("#count").append("<span>. </span>")
+    });
+    
+    $("#stop").fadeIn().click(function() {
+      inf.stop();
+    });
+  });
+  
+  $("#each").click(function() {
+    $("#count").empty();
+      _.nf.each(window, function(index, el) {
+      $("#count").append("<span>"+index+", </span>");
+    });
+  });
+  
+  $("#nonresp").click(function() {
+    for (var i = 0; i < Number.MAX_VALUE; i++) {
+      $("#count").append("<span>.</span>");
+    }
+  });
+});
+
+</script>
+<body>
+  <button id="resp">Start non-freezing for</button>
+  <button id="nonresp">Start freezing for <span id="warn">(may crash your computer)</span></button>
+  <button id="infinite">Start infinite</button>
+  <button id="each">Start each</button>
+  <button id="stop">Stop</button>
+  <div id="count"></div>
+</body>
+</html>
