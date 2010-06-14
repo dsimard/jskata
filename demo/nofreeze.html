@@ -14,14 +14,14 @@ $(document).ready(function() {
   $("#resp").click(function() {
     var i = 0;
     jsk.nofreeze.for(
-      function() { i < 100; console.log("if", i); },
-      function() { console.log("inv", i); i++; console.log("after", i);},
+      function() { return i < 1000;  },
+      function() { i++; },
       function fct() {
-        console.log("after", i);
+        $("#count").append("<span>. </span>");
       },
       null,
       function() {
-        console.log("obj", i);
+        console.log("STOPPED", i);
       }
     );
     return;
