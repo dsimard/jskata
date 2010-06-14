@@ -21,7 +21,7 @@ $(document).ready(function() {
       },
       null,
       function() {
-        console.log("STOPPED", i);
+        $("#count").append("<span>stopped</span>");
       }
     );
     return;
@@ -35,7 +35,6 @@ $(document).ready(function() {
       },
       null,
       function() {
-        console.log("stopped first", i);
       }
     );
     
@@ -48,7 +47,7 @@ $(document).ready(function() {
       },
       null,
       function() {
-        console.log("stopped second", j);
+        $("#count").append("<span>stopped</span>");
       }
     );
     
@@ -73,8 +72,7 @@ $(document).ready(function() {
   
   $("#each").click(function() {
     $("#count").empty();
-    _.nf.each(window, function(index, el) {
-      console.log("append", this);
+      _.nf.each(window, function(index, el) {
       $("#count").append("<span>"+index+", </span>");
     });
   });
