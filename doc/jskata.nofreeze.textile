@@ -33,7 +33,7 @@ bc.. for(var i = 0; i < 1000; i++) {
 p. you write
 
 bc.. var i = 0;
-jsk.responsive.for(
+jsk.nofreeze.for(
   function() {return i < 1000}, 
   function() {i++},
   function() {alert(i)}
