@@ -13,7 +13,7 @@ $(document).ready(function() {
 
   $("#resp").click(function() {
     var i = 0;
-    jsk.nofreeze.for(
+    jsk.nofreeze.forloop(
       function() { return i < 1000;  },
       function() { i++; },
       function fct() {
@@ -27,7 +27,7 @@ $(document).ready(function() {
     return;
     
     var i = 0;
-    var f = jsk.nofreeze.for(
+    var f = jsk.nofreeze.forloop(
       function() {return i < 10}, 
       function() {i++;},
       function() {
@@ -39,7 +39,7 @@ $(document).ready(function() {
     );
     
     var j = 0;
-    var f2 = jsk.nofreeze.for(
+    var f2 = jsk.nofreeze.forloop(
       function() {return j <= Number.MAX_VALUE}, 
       function() {j++},
       function() {
@@ -87,7 +87,7 @@ $(document).ready(function() {
 </script>
 <body>
   <button id="resp">Start non-freezing for</button>
-  <button id="nonresp">Start freezing for <span id="warn">(may crash your computer)</span></button>
+  <button id="nonresp">Start freezing for <strong id="warn">(will crash your computer)</strong></button>
   <button id="infinite">Start infinite</button>
   <button id="each">Start each</button>
   <button id="stop">Stop</button>

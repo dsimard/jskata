@@ -11,7 +11,7 @@ h2. Properties
 
 h2. Functions
 
-h3. for(wh, inc, fct, options{sleepFor:integer, chunkSize:integer}, stopCallback) returns [stop]
+h3. forloop(wh, inc, fct, options{sleepFor:integer, chunkSize:integer}, stopCallback) returns [stop]
 
 *wh* function (should return boolean) : The while condition
 *inc* function : The increment

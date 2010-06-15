@@ -4,7 +4,7 @@
     chunkSize : 10, // How many executions before sleep
     stops : [], // Contains all stop functions
     // A responsive for
-    for:function for_(wh, inc, fct, options, stopCallback) {
+    forloop:function for_(wh, inc, fct, options, stopCallback) {
       var self = this;
       var timerId;
       
@@ -47,7 +47,7 @@
     },
     // Create an infinite loop
     infinite:function infinite(fct, options, stopCallback) {
-      return this.for(
+      return this.forloop(
         function() { return true; },
         null,
         fct,
@@ -61,7 +61,7 @@
       // taken from jQuery
       if (toString.call(obj) == "[object Array]") {
         var i = 0;
-        return this.for(
+        return this.forloop(
           function() { return i < obj.length; },
           function() { i++; },
           function() { fct.call(obj[i], i, obj[i]); },
@@ -74,7 +74,7 @@
         var props = [];
         for(var prop in obj) { props.push(prop); }
         var i = 0;
-        return this.for(
+        return this.forloop(
           function() { return i < props.length; },
           function() { i++; },
           function() { fct.call(obj[props[i]], props[i], obj[props[i]]);},
