@@ -6,14 +6,14 @@
   #count {
 </style>
 <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
-<script src="http://github.com/dsimard/jskata/raw/v0.2/src/jskata.nofreeze.js"></script>
+<script src="http://github.com/dsimard/jskata/raw/v0.2.1/src/jskata.nofreeze.js"></script>
 <script>
 $(document).ready(function() {
   $("#stop").click(function() {$(this).fadeOut();});
 
   $("#resp").click(function() {
     var i = 0;
-    jsk.nofreeze.for(
+    jsk.nofreeze.forloop(
       function() { return i < 1000;  },
       function() { i++; },
       function fct() {
@@ -27,7 +27,7 @@ $(document).ready(function() {
     return;
     
     var i = 0;
-    var f = jsk.nofreeze.for(
+    var f = jsk.nofreeze.forloop(
       function() {return i < 10}, 
       function() {i++;},
       function() {
@@ -39,7 +39,7 @@ $(document).ready(function() {
     );
     
     var j = 0;
-    var f2 = jsk.nofreeze.for(
+    var f2 = jsk.nofreeze.forloop(
       function() {return j <= Number.MAX_VALUE}, 
       function() {j++},
       function() {
