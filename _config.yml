@@ -1,3 +1,4 @@
+server: true
 destination: ./_site
 auto:        true
 server_port: 4000
