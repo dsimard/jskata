@@ -1,27 +1,20 @@
-<html>
-<head>
-<title>jskataUndo</title>
-<script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
-<script src="http://github.com/dsimard/jskata/raw/v0.2.1/src/jskata.undo.js"></script>
+---
+layout: jskata
+title: Undo library
+---
 <script src="undo.js"></script>
 <style>
   #undo[disabled], #redo[disabled] {
     border:1px solid #bbb;
   }
 </style>
-</head>
-<body>
-	<h1>jskataUndo</h1>
-
-	<input type="button" id="undo" disabled="true" value="Undo" />
-	<input type="button" id="redo"  disabled="true" value="Redo" />
-	<br /><br />
-	<input type="text" id="user" /><button id="addUser">add user</button>
-	<br />
-	<input type="text" id="project" /><button id="addProject">add project (ajax)</button>
-	<br />
-	<h3>Actions</h3>
-	<ul id="actions" />
-</body>
-</html>
+<input type="text" id="user" /><button id="addUser">add user</button>
+<br />
+<input type="text" id="project" /><button id="addProject">add project (ajax)</button>
+<br />
+<input type="button" id="undo" disabled="true" value="Undo" />
+<input type="button" id="redo"  disabled="true" value="Redo" />
+<hr />
+<h3>Actions</h3>
+<ul id="actions" />
 
