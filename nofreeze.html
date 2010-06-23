@@ -4,93 +4,33 @@ title: NoFreeze library
 ---
 <style>
   #warn { color:red; }
-  #stop { display:none; }
-  #count {
+  .stop { display:none; }
 </style>
-<script>
-$(document).ready(function() {
-  $("#stop").click(function() {$(this).fadeOut();});
-
-  $("#resp").click(function() {
-    var i = 0;
-    jsk.nofreeze.forloop(
-      function() { return i < 1000;  },
-      function() { i++; },
-      function fct() {
-        $("#count").append("<span>. </span>");
-      },
-      null,
-      function() {
-        $("#count").append("<span>stopped</span>");
-      }
-    );
-    return;
-    
-    var i = 0;
-    var f = jsk.nofreeze.forloop(
-      function() {return i < 10}, 
-      function() {i++;},
-      function() {
-        $("#count").append("<span>. </span>");
-      },
-      null,
-      function() {
-      }
-    );
-    
-    var j = 0;
-    var f2 = jsk.nofreeze.forloop(
-      function() {return j <= Number.MAX_VALUE}, 
-      function() {j++},
-      function() {
-        $("#count").append("<span>| </span>");
-      },
-      null,
-      function() {
-        $("#count").append("<span>stopped</span>");
-      }
-    );
-    
-    $("#stop").fadeIn().click(function() {
-      f.stop();
-      setTimeout(function() {
-        f2.stop(); $("#stop").fadeOut();
-       }, 1000);
-    });
-  });
-  
-  $("#infinite").click(function() {
-    jsk.nofreeze.stop();
-    var inf = jsk.nofreeze.infinite(function() {
-      $("#count").append("<span>. </span>")
-    });
-    
-    $("#stop").fadeIn().click(function() {
-      inf.stop();
-    });
-  });
-  
-  $("#each").click(function() {
-    $("#count").empty();
-      _.nf.each(window, function(index, el) {
-      $("#count").append("<span>"+index+", </span>");
-    });
-  });
-  
-  $("#nonresp").click(function() {
-    for (var i = 0; i < Number.MAX_VALUE; i++) {
-      $("#count").append("<span>.</span>");
-    }
-  });
-});
-
-</script>
-<body>
-  <button id="resp">Start non-freezing for</button>
-  <button id="nonresp">Start freezing for <span id="warn">(may crash your computer)</span></button>
+<script src="nofreeze.js"></script>
+<p>
+  <h2>Non-freezing for</h2>
+  <p>
+    This will show a dot at each loop until <em>Number.MAX_VALUE</em> 
+    is reached without freezing your computer.
+  </p>
+  <button id="nonFreezingFor">Start non-freezing for</button>
+  <button id="nonFreezingStop" class="stop">Stop</button>
+  <div id="nonFreezingCount">&nbsp;</div>
+</p>
+<p>
+  <h2>Infinite loop</h2>
+  <p>
+    This will show random numbers until you click the <strong>stop</strong> button.
+  </p>
   <button id="infinite">Start infinite</button>
+  <button id="stopInfinite" class="stop">Stop</button>
+  <div id="infiniteRandom">&nbsp;</div>
+</p>
+<p>
+  <h2>Each</h2>
+  <p>
+    This will show each property of the <strong>document</strong> object.
+  </p>
   <button id="each">Start each</button>
-  <button id="stop">Stop</button>
-  <div id="count"></div>
-</body>
-</html>
+  <div id="windowEach"></div>
+</p>
