@@ -35,10 +35,19 @@ $(document).ready(function() {
   /********** EACH **********/
   var eachLoop = function eachLoop() {
     _.nf.each(window, function(index, el) {
-      $("#windowEach").append("<span>"+index+", </span>");
+      $("#windowEach").text(index);
     });
   }
   
   $("#each").click(eachLoop);
+  
+  /********** ALL PROCESSES **********/
+  $("#startAll").click(function() {
+    $("#infinite, #nonFreezingFor, #each").click();
+  });
+  
+  $("#stopAll").click(function() {
+    jsKata.nofreeze.stop();
+  });
 });
 
