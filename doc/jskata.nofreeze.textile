@@ -11,7 +11,7 @@ h2. Properties
 
 h2. Functions
 
-h3. forloop(wh, inc, fct, options{sleepFor:integer, chunkSize:integer}, stopCallback) returns [stop]
+h3. forloop(wh, inc, fct, options{sleepFor:integer, chunkSize:integer}, stopCallback) returns {stop:function}
 
 *wh* function (should return boolean) : The while condition
 *inc* function : The increment
@@ -22,7 +22,7 @@ bq. *sleepFor* integer : How many milliseconds should it sleeps
 *chunkSize* integer : How many executions before sleep
 
 *stopCallback* hash : Called when the process is stopped
-*stop* function : Call this function to stop the thread
+*stop* function : Call this function to stop the process
 
 This function looks like the basic _for_ except that _wh_ and _inc_ are functions. Instead of 
 
@@ -39,16 +39,16 @@ jsk.nofreeze.for(
   function() {alert(i)}
 )
 
-h3. infinite(fct, options, stopCallback) returns [stop]
+h3. infinite(fct, options, stopCallback) returns {stop:function}
 
 *fct* function : The function to execute
 *options* hash of [sleepFor|chunkSize] : To override defaults
-*stop* function : Call this function to stop the process
 *stopCallback* hash : Called when the process is stopped
+*stop* function : Call this function to stop the process
 
 Starts an infinite loop.
 
-h3. each(obj, fct(index, item), options, stopCallback) returns [stop]
+h3. each(obj, fct(index, item), options, stopCallback) returns {stop:function}
 
 *obj* array or object : Can be an array or an object
 *fct* function : The function to execute
@@ -56,7 +56,7 @@ h3. each(obj, fct(index, item), options, stopCallback) returns [stop]
 *item* object : The current object of the loop
 *options* hash of [sleepFor|chunkSize] : To override defaults
 *stopCallback* hash : Called when the process is stopped
-*stop* function : Call this function to stop the thread
+*stop* function : Call this function to stop the process
 
 Loop through each of the element of an array.
 
