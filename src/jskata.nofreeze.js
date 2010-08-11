@@ -45,6 +45,18 @@
       
       return {stop:stop};
     },
+    // A simple for with an index increasing to a count
+    forCount : function forCount(maxCount, fct, options, stopCallback) {
+      var jsKataforCountIndex = (options && options["beginAt"]) || 0;
+      var newFct = function() { fct(jsKataforCountIndex); };
+      return this.forloop(
+        function() {return jsKataforCountIndex <= maxCount;},
+        function() {jsKataforCountIndex++;},
+        newFct,
+        options,
+        stopCallback
+      )
+    },
     // Create an infinite loop
     infinite:function infinite(fct, options, stopCallback) {
       return this.forloop(

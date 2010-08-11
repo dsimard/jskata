@@ -6,7 +6,6 @@ h2. Properties
 
 *sleepFor* integer (default 1) : How many milliseconds should it sleeps 
 *chunkSize* integer (default 10) : How many executions before sleep
-*stops* integer (default 10) : How many executions before sleep
 *stops* [functions] : Contains all the stop functions started in a different processes
 
 h2. Functions
@@ -36,6 +35,29 @@ bc.. var i = 0;
 jsk.nofreeze.for(
   function() {return i < 1000}, 
   function() {i++},
+  function() {alert(i)}
+)
+
+h3. forCount(maxCount, fct(index), options, stopCallback) return {stop:function}
+
+*maxCount* integer : couting up to this number
+*fct* function : The function to execute
+*index* integer : The current index of the loop
+*options* hash : 
+
+bq. *beginAt* integer : From which number should the count begin (default 0)
+see _options_ in _forloop_
+
+This is a simpler loop.
+
+bc.. for(var i = 0; i < 1000; i++) {
+  alert(i);
+}
+
+p. would become
+
+bc.. var i = 0;
+jsk.nofreeze.forCount(1000,
   function() {alert(i)}
 )
 

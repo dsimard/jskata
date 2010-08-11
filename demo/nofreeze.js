@@ -1,4 +1,11 @@
 $(document).ready(function() {
+
+  $("#forCount").click(function() {
+    jsKata.nofreeze.forCount(1000000, function(i) {
+      document.title = i;
+    });
+  });
+
   $("#stop").click(function() {$(this).fadeOut();});
 
   // A non-freezing for
