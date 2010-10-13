@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <script src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+  <link rel="stylesheet" href="qunit.css" type="text/css" media="screen" />
+  <script type="text/javascript" src="qunit.js"></script>
+  <script type="text/javascript" src="../src/jskata.timezone.js"></script>
+</head>
+<body>
+ <h1 id="qunit-header">jsKata.timezone</h1>
+ <h2 id="qunit-banner"></h2>
+ <h2 id="qunit-userAgent"></h2>
+ <ol id="qunit-tests"></ol>
+<script>
+$(document).ready(function(){
+  test("test namespace", function() {
+    ok(_.tz !== undefined);
+    ok(javascriptKataDotCom.timezone !== undefined);
+  });
+  
+  test("north america - eastern time", function() {
+    jsk.tz.testOffset(300, 240);
+    ok(jsk.tz.hasDst());
+    ok(jsk.tz.st() != jsk.tz.dst());
+    equal(jsk.tz.invertedSt(), 300);
+    equal(jsk.tz.st(), -300);
+    equal(jsk.tz.dst(), -240);
+    equal(jsk.tz.stToString(), "-0500");
+    equal(jsk.tz.dstToString(), "-0400");
+  });
+  
+  test("north america - St John (30 minute offset)", function() {
+    jsk.tz.testOffset(210, 150);
+    equal(jsk.tz.stToString(), "-0330")
+    equal(jsk.tz.dstToString(), "-0230");
+  });
+  
+  test("Australia - Dysney", function() {
+    jsk.tz.testOffset(-660, -600);
+    ok(jsk.tz.hasDst());
+    ok(jsk.tz.st() != jsk.tz.dst());
+    equal(jsk.tz.invertedSt(), -600);
+    equal(jsk.tz.st(), 600);
+  });
+  
+  test("Argentina - San Luis - no DST", function() {
+    jsk.tz.testOffset(180, 180);
+    ok(!jsk.tz.hasDst());
+    ok(jsk.tz.st() == jsk.tz.dst());
+  });
+  
+  test("Brazil - Sao Paulo", function() {
+    jsk.tz.testOffset(120, 180);
+    ok(jsk.tz.hasDst());
+    ok(jsk.tz.st() != jsk.tz.dst());
+  });
+  
+  test("Hong Kong - no DST", function() {
+    jsk.tz.testOffset(-480, -480);
+    ok(!jsk.tz.hasDst());
+    ok(jsk.tz.st() == jsk.tz.dst());
+  });
+  
+  test("London", function() {
+    jsk.tz.testOffset(0, -60);
+    ok(jsk.tz.hasDst());
+    ok(jsk.tz.st() != jsk.tz.dst());
+  });
+  
+  test("Africa - Ouagadougou - hi to my fellow co-worker Yaya!", function() {
+    jsk.tz.testOffset(0, 0);
+    ok(!jsk.tz.hasDst());
+    ok(jsk.tz.st() == jsk.tz.dst());
+  });
+});
+</script>
+</body>
+</html>
+

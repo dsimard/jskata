@@ -108,7 +108,7 @@
 	  }
   }
   
-  // Creates the base namespace
+  // Creates the base namespaces
   if (typeof(window["javascriptKataDotCom"]) == "undefined") 
     window.javascriptKataDotCom = {};    
   if (typeof(window["jsKata"]) == "undefined") 
