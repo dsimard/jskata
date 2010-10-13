@@ -1,5 +1,0 @@
-h1. jsKata docs
-
-"jskata.nofreeze":jskata.nofreeze.textile avoids freezing by splitting long processes into smaller ones.
-
-"jskata.undo":jskata.undo.textile makes undo & redo management easy.
