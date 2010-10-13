@@ -66,12 +66,15 @@ $(document).ready(function(){
     jsk.tz.testOffset(0, -60);
     ok(jsk.tz.hasDst());
     ok(jsk.tz.st() != jsk.tz.dst());
+    equal(jsk.tz.stToString(), "+0000");
   });
   
-  test("Africa - Ouagadougou - hi to my fellow co-worker Yaya!", function() {
+  test("Africa - Ouagadougou - hi to my ex-coworker Yaya!", function() {
     jsk.tz.testOffset(0, 0);
     ok(!jsk.tz.hasDst());
     ok(jsk.tz.st() == jsk.tz.dst());
+    equal(jsk.tz.stToString(), "+0000");
+    equal(jsk.tz.stToString(), jsk.tz.dstToString());
   });
 });
 </script>
