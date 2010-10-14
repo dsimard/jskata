@@ -1,0 +1,21 @@
+---
+layout: jskata
+title: Timezone library
+---
+<style>
+  #test span { font-weight:bold; }
+</style>
+<div id="test">
+  Do you have daylight saving? <span id="hasDst"></span><br />
+  Your standard time : <span id="st"></span><br />
+  Your daylight saving time : <span id="dst"></span><br />
+</div>
+<br /><br />
+<a href="/">&lt;&lt; go back</a>
+<script>
+$(document).ready(function() {
+  $("#hasDst").text(jsk.tz.hasDst().toString());
+  $("#st").text(jsk.tz.stToString());
+  $("#dst").text(jsk.tz.dstToString());
+});
+</script>
