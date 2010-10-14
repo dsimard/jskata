@@ -11,6 +11,7 @@
     breakingMonth : 0,
     testMonth0Offset : null,
     testMonth6Offset : null,
+    timeSepator : "",
     /******* PRIVATE *******/
     getDateOffset : function getDate(month) {
       return new Date((new Date()).getFullYear(), month, 0).getTimezoneOffset();
@@ -25,17 +26,23 @@
         jsk.testMonth6Offset :
         jsk.getDateOffset(jsk.breakingMonth+6);
     },
-    offsetToString : function(offset) {
+    offsetToString : function(offset, timeSeparator) {
+      timeSeparator = timeSeparator || jsk.timeSeparator || "";
+
+      var parts = [];
+      
       var st = offset/60.0;
-      sign = st >= 0 ? "+" : "-";
+      parts.push(st >= 0 ? "+" : "-");
 
       var hour = Math.floor(Math.abs(st)); 
-      hour = (hour <= 9 ? "0" : "") + hour;
+      parts.push((hour <= 9 ? "0" : "") + hour);
+      
+      parts.push(timeSeparator);
       
       var min = Math.abs(st%1.0)*60;
-      min = (min <= 9 ? "0" : "") + min;
+      parts.push((min <= 9 ? "0" : "") + min);
       
-      return sign + hour + min;
+      return parts.join("");
     },
     /******* PUBLIC *******/
     // Force some test offsets
@@ -60,16 +67,16 @@
       return 0-jsk.invertedSt();
     },
     // Returns standard to string
-    stToString : function() {
-      return jsk.offsetToString(jsk.st());
+    stToString : function(timeSeparator) {
+      return jsk.offsetToString(jsk.st(), timeSeparator);
     },
     // Returns the standard time offset
     dst : function dst() {
       return 0-jsk.invertedDst();
     },
     // Returns daylight saving to string
-    dstToString : function() {
-      return jsk.offsetToString(jsk.dst());
+    dstToString : function(timeSeparator) {
+      return jsk.offsetToString(jsk.dst(), timeSeparator);
     },
     iHateTheLastComma : true // this line exists because I hate the last comma
   }

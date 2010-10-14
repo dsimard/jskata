@@ -28,12 +28,19 @@ $(document).ready(function(){
     equal(jsk.tz.dst(), -240);
     equal(jsk.tz.stToString(), "-0500");
     equal(jsk.tz.dstToString(), "-0400");
+    equal(jsk.tz.stToString(":"), "-05:00");
   });
   
   test("north america - St John (30 minute offset)", function() {
     jsk.tz.testOffset(210, 150);
     equal(jsk.tz.stToString(), "-0330")
     equal(jsk.tz.dstToString(), "-0230");
+    
+    // Set time separator
+    jsk.tz.timeSeparator = "|";
+    equal(jsk.tz.stToString(), "-03|30");
+    equal(jsk.tz.stToString(":"), "-03:30");
+    jsk.tz.timeSeparator = "";
   });
   
   test("Australia - Dysney", function() {
