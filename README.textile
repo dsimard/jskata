@@ -6,9 +6,9 @@ p. "official site":http://dsimard.github.com/jskata - "twitter":http://twitter.c
 
 h2. Documentation
 
-Documentation is maintained by hand. I guess there's no better way of doing it.
+Documentation is maintained by hand.
 
-It is available in the *doc* subfolder.
+It is available at [[http://github.com/dsimard/jskata/wiki]]
 
 h2. Namespaces
 
