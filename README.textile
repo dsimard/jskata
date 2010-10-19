@@ -8,7 +8,7 @@ h2. Documentation
 
 Documentation is maintained by hand.
 
-It is available at [[http://github.com/dsimard/jskata/wiki]]
+Doc is available in the "wiki":http://github.com/dsimard/jskata/wiki
 
 h2. Namespaces
 
