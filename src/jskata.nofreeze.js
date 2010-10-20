@@ -1,3 +1,4 @@
+/*jslint forin: true */
 (function() {
   var jsk = {
     sleepFor : 1, // How many milliseconds should it sleeps
@@ -8,21 +9,23 @@
       var self = this;
       var timerId;
       
-      var sleepFor = options && options["sleepFor"] ? 
-        options["sleepFor"] : this.sleepFor;
+      var sleepFor = options && options.sleepFor ? 
+        options.sleepFor : this.sleepFor;
         
-      var chunkSize = options && options["chunkSize"] ? 
-        options["chunkSize"] : this.chunkSize;
+      var chunkSize = options && options.chunkSize ? 
+        options.chunkSize : this.chunkSize;
         
       // Create the stop function
       var innerStop = function innerStop() {
-        if (stopCallback) stopCallback();
+        if (stopCallback) { stopCallback(); }
         clearTimeout(timerId);
-      }
+      };
+      
       var stop = function stopWrapper() {
-        if (innerStop) innerStop();
+        if (innerStop) { innerStop(); }
         innerStop = null;
       };
+      
       self.stops.push(stop);
       
       // Execute a chunk of code
@@ -30,7 +33,7 @@
         var jskcurrent = 0;
         while (wh() && jskcurrent++ < chunkSize) {
           fct();
-          if (inc) inc();
+          if (inc) { inc(); }
         } 
         
         if (wh()) { 
@@ -38,7 +41,7 @@
         } else {
           stop();
         }
-      }
+      };
             
       // Start the process
       chunk();
@@ -47,7 +50,7 @@
     },
     // A simple for with an index increasing to a count
     forCount : function forCount(maxCount, fct, options, stopCallback) {
-      var jsKataforCountIndex = (options && options["beginAt"]) || 0;
+      var jsKataforCountIndex = (options && options.beginAt) || 0;
       var newFct = function() { fct(jsKataforCountIndex); };
       return this.forloop(
         function() {return jsKataforCountIndex <= maxCount;},
@@ -55,7 +58,7 @@
         newFct,
         options,
         stopCallback
-      )
+      );
     },
     // Create an infinite loop
     infinite:function infinite(fct, options, stopCallback) {
@@ -65,14 +68,16 @@
         fct,
         options,
         stopCallback
-      )
+      );
     },
     // Each
     each:function(obj, fct, options, stopCallback) {
+      var i = 0;
+      
       // If it's an array
       // taken from jQuery
       if (toString.call(obj) == "[object Array]") {
-        var i = 0;
+        i = 0;
         return this.forloop(
           function() { return i < obj.length; },
           function() { i++; },
@@ -84,8 +89,8 @@
       } else {
         // Create an array of properties
         var props = [];
-        for(var prop in obj) { props.push(prop); }
-        var i = 0;
+        for(var prop in obj) {props.push(prop); }
+        i = 0;
         return this.forloop(
           function() { return i < props.length; },
           function() { i++; },
@@ -97,22 +102,19 @@
     },
     // Stop it after the next round
     stop:function() {
-      for(var i = 0, fct; fct = this.stops[i]; i++) {
+      for(var i = 0; i < this.stops.length; i++) {
         fct();
       }
-      if (this.onStop) this.onStop();
+      if (this.onStop) { this.onStop(); }
     }
-  }
+  };
 
   // Creates the base namespaces
-  if (typeof(window["javascriptKataDotCom"]) == "undefined") 
-    window.javascriptKataDotCom = {};    
-  if (typeof(window["jsKata"]) == "undefined") 
-    window.jsKata = window.javascriptKataDotCom;
-  if (typeof(window["jsk"]) == "undefined")
-    window.jsk = window.javascriptKataDotCom;
-  if (typeof(window["_"]) == "undefined") 
-    window._ = window.javascriptKataDotCom;
+  if (typeof(window.javascriptKataDotCom) == "undefined") { window.javascriptKataDotCom = {}; }
+  if (typeof(window.jsKata) == "undefined") { window.jsKata = window.javascriptKataDotCom; }
+  if (typeof(window.jsk) == "undefined") { window.jsk = window.javascriptKataDotCom; }
+  if (typeof(window._) == "undefined") { window._ = window.javascriptKataDotCom; }
+    
   window.javascriptKataDotCom.nofreeze = jsk; 
   window.javascriptKataDotCom.nf = window.javascriptKataDotCom.nofreeze;
-})()
+})();

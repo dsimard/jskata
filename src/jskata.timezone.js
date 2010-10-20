@@ -17,12 +17,12 @@
       return new Date((new Date()).getFullYear(), month, 0).getTimezoneOffset();
     },
     getMonth0Offset : function() {
-      return jsk.testMonth0Offset != null ?
+      return jsk.testMonth0Offset !== null ?
         jsk.testMonth0Offset :
         jsk.getDateOffset(jsk.breakingMonth);
     },
     getMonth6Offset : function() {
-      return jsk.testMonth6Offset != null ?
+      return jsk.testMonth6Offset !== null ?
         jsk.testMonth6Offset :
         jsk.getDateOffset(jsk.breakingMonth+6);
     },
@@ -79,18 +79,14 @@
       return jsk.offsetToString(jsk.dst(), timeSeparator);
     },
     iHateTheLastComma : true // this line exists because I hate the last comma
-  }
+  };
   
   // Creates the base namespaces
-  if (typeof(window["javascriptKataDotCom"]) == "undefined") 
-    window.javascriptKataDotCom = {};    
-  if (typeof(window["jsKata"]) == "undefined") 
-    window.jsKata = window.javascriptKataDotCom;
-  if (typeof(window["jsk"]) == "undefined")
-    window.jsk = window.javascriptKataDotCom;
-  if (typeof(window["_"]) == "undefined") 
-    window._ = window.javascriptKataDotCom; 
+  if (typeof(window.javascriptKataDotCom) == "undefined") { window.javascriptKataDotCom = {}; }
+  if (typeof(window.jsKata) == "undefined") { window.jsKata = window.javascriptKataDotCom; }
+  if (typeof(window.jsk) == "undefined") { window.jsk = window.javascriptKataDotCom; }
+  if (typeof(window._) == "undefined") { window._ = window.javascriptKataDotCom; }
     
   window.javascriptKataDotCom.timezone = jsk; 
   window.javascriptKataDotCom.tz = jsk;
-})()
+})();

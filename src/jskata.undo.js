@@ -22,66 +22,67 @@
 	    // (see redoFunction)
 	    var data;
 	    
-	    if (options == null) options = {};
+	    if (options === null) { options = {}; }
 	    
-	    if (this.isFct(doFunction) && options["async"] !== true) { 
+	    if (this.isFct(doFunction) && options.async !== true) { 
 	      data = doFunction();
-  	  }
-  	  
-  	  // This causes me problem on async
-  	  // TODO : This is not thread safe but I didn't find yet how to do it
-  	  if (jsk.isInAsyncRedo !== true) {
-    	  this.undids = [];
-    	}    	
-    	jsk.isInAsyncRedo = false; 
-    	
+      }
+
+      // This causes me problem on async
+      // TODO : This is not thread safe but I didn't find yet how to do it
+      if (jsk.isInAsyncRedo !== true) {
+        this.undids = [];
+      }
+      jsk.isInAsyncRedo = false; 
+
       // If there's data in options, use them
-      if (options["data"]) data = options["data"];
-  	  
-  	  // Create a new undo and pass what the do returned
-  	  var wrappedUndo = function wrappedUndo() {
-  	    undoFunction(data);
-  	  }
-  	    	  
-  	  this.dids.push({redo:doFunction, undo:undoFunction, 
-  	    wrappedUndo:wrappedUndo, options:options});
-  	  
+      if (options.data) { data = options.data; }
+
+      // Create a new undo and pass what the do returned
+      var wrappedUndo = function wrappedUndo() {
+        undoFunction(data);
+      };
+
+      this.dids.push({redo:doFunction, undo:undoFunction, 
+        wrappedUndo:wrappedUndo, options:options});
+
       this.fireEvents();
-      
+
       return data;
 	  },
 	  // Undo
 	  undo : function undo() {
 		  var fct = this.dids && this.dids.length > 0 ? this.dids.pop() : null;
-		  if (this.isFct(fct["wrappedUndo"])) {
-		    fct["wrappedUndo"]();
+		  if (this.isFct(fct.wrappedUndo)) {
+		    fct.wrappedUndo();
 		    
 		    // There can be no "do" so don't push a redo
-		    if (this.isFct(fct["redo"]))
-	        this.undids.push({redo:fct["redo"], undo:fct["undo"], 
-	        options : fct["options"]});
+		    if (this.isFct(fct.redo)) {
+	        this.undids.push({redo:fct.redo, undo:fct.undo, 
+	        options : fct.options});
+	      }
 		  }
-	  	
-	  	this.fireEvents();
+
+      this.fireEvents();
 	  },
 	  // Redo
 	  redo : function redo() {
 	    var fct = this.undids && this.undids.length > 0 ? this.undids.pop() : null;
-	    if (this.isFct(fct["redo"])) {
-	      jsk.isInAsyncRedo = fct["options"]["async"];
-	      var data = fct["redo"]();
+	    if (this.isFct(fct.redo)) {
+	      jsk.isInAsyncRedo = fct.options.async;
+	      var data = fct.redo();
 	      
 	      // If there's data in options, use them
-	      if (fct["options"]["data"]) data = fct["options"]["data"];
+	      if (fct.options.data) { data = fct.options.data; }
 	      
 	      var wrappedUndo = function wrappedUndo() {
-	        fct["undo"](data);
-	      }
+	        fct.undo(data);
+	      };
 	      
 	      // Put the redo in dids (if in async, skip this)
-	      if (fct["options"]["async"] !== true) {
-	        this.dids.push({redo:fct["redo"],undo:fct["undo"],
-	          wrappedUndo:wrappedUndo, options:fct["options"]});
+	      if (fct.options.async !== true) {
+	        this.dids.push({redo:fct.redo,undo:fct.undo,
+	          wrappedUndo:wrappedUndo, options:fct.options});
 	      }
 	    }
 	    
@@ -99,27 +100,24 @@
 	  ///// PRIVATE
 	  // fired when something changes
 	  fireEvents : function() {
-		  if (this.onChange) this.onChange();
-		  if (this.dids.length == 0 && this.undids.length == 0) this.onEmpty();
+		  if (this.onChange) { this.onChange(); }
+		  if (this.dids.length === 0 && this.undids.length === 0) { this.onEmpty(); }
 	  },
 	  // is Function
 	  isFct : function(fct) {
 	    return fct && typeof fct == "function";
 	  }
-  }
+  };
   
   // Creates the base namespaces
-  if (typeof(window["javascriptKataDotCom"]) == "undefined") 
-    window.javascriptKataDotCom = {};    
-  if (typeof(window["jsKata"]) == "undefined") 
-    window.jsKata = window.javascriptKataDotCom;
-  if (typeof(window["jsk"]) == "undefined")
-    window.jsk = window.javascriptKataDotCom;
-  if (typeof(window["_"]) == "undefined") 
-    window._ = window.javascriptKataDotCom; 
+  if (typeof(window.javascriptKataDotCom) == "undefined") { window.javascriptKataDotCom = {}; }
+  if (typeof(window.jsKata) == "undefined") { window.jsKata = window.javascriptKataDotCom; }
+  if (typeof(window.jsk) == "undefined") { window.jsk = window.javascriptKataDotCom; }
+  if (typeof(window._) == "undefined") { window._ = window.javascriptKataDotCom; }
+    
   window.javascriptKataDotCom.undo = jsk; 
   window.javascriptKataDotCom.u = jsk;
 
   // Shortcut for backward compatibility
   window.jskataUndo = window.javascriptKataDotCom.undo; 
-})()
+})();
