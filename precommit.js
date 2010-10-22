@@ -31,7 +31,7 @@ function compress(file) {
   rest.post("http://closure-compiler.appspot.com/compile", {data : params})
     .addListener('complete', function(data) {
       var filename = file.match(/[^/]+$/i)[0];
-      filename = filename.replace(/\.js$/i, "min.js");
+      filename = filename.replace(/\.js$/i, ".min.js");
       var path = fs.realpathSync("./minified/");
       fs.writeFileSync(path + "/" + filename, data);
     });
