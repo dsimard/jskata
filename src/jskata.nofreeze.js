@@ -103,7 +103,7 @@
     // Stop it after the next round
     stop:function() {
       for(var i = 0; i < this.stops.length; i++) {
-        fct();
+        this.stops[i]();
       }
       if (this.onStop) { this.onStop(); }
     }

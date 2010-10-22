@@ -21,8 +21,8 @@
 	    // If in async, it will not execute the do when calling redo
 	    // (see redoFunction)
 	    var data;
-	    
-	    if (options === null) { options = {}; }
+
+	    if (options === undefined || options === null) { options = {}; }
 	    
 	    if (this.isFct(doFunction) && options.async !== true) { 
 	      data = doFunction();
