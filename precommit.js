@@ -40,8 +40,10 @@ function compress(file) {
 function jslint(file) {
   var cp = require('child_process');
   
+  var jslintPath = fs.realpathSync("./vendor/jslint/bin/jslint.js");
+  
   // Run jslint on each file
-  var jslint = cp.exec("jslint " + file, function(error, stdout, stderr) {
+  var jslint = cp.exec("node " + jslintPath + " " + file, function(error, stdout, stderr) {
     if (error) {
       sys.puts(file + " : " + error);
     }
