@@ -14,7 +14,7 @@ function for_each_js(callback) {
 
 // Compress with google compiler
 function compress(file) {
-  var rest = require("./restler/restler");
+  var rest = require("./restler-copy/restler");
 
   var http = require('http');
   var google = http.createClient(80, 'http://closure-compiler.appspot.com/compile');
