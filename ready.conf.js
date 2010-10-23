@@ -1,4 +1,4 @@
-var config = {src : "./src",
+{src : "./src",
   dest : "./minified",
-  debug : true
+  debug : true,
 }
