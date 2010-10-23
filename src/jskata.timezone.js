@@ -89,4 +89,4 @@
     
   window.javascriptKataDotCom.timezone = jsk; 
   window.javascriptKataDotCom.tz = jsk;
-})()
+})();
