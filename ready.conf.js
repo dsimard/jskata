@@ -1,5 +1,7 @@
 {src : "./src",
   dest : "./minified",
-  watch : false,
+  minifiedExtension : "min",
   debug : true,
+  aggregateTo : "./src/jskata.js",
+  runGCompiler : true,
 }
