@@ -73,6 +73,7 @@
     // Each
     each:function(obj, fct, options, stopCallback) {
       var i = 0;
+      var j = 0;
       
       // If it's an array
       // taken from jQuery
