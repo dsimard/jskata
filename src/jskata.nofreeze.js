@@ -73,12 +73,10 @@
     // Each
     each:function(obj, fct, options, stopCallback) {
       var i = 0;
-      var j = "included in minified? no!";
       
       // If it's an array
       // taken from jQuery
       if (Object.prototype.toString.call(obj) == "[object Array]") {
-        j = "";
         i = 0;
         return this.forloop(
           function() { return i < obj.length; },
