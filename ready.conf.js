@@ -2,6 +2,6 @@
   dest : "./minified",
   minifiedExtension : "min",
   debug : true,
-  aggregateTo : "./src/jskata.js",
+  aggregateTo : "./minified/jskata.js",
   runGCompiler : true,
 }

@@ -5,7 +5,7 @@
     chunkSize : 10, // How many executions before sleep
     stops : [], // Contains all stop functions
     // A responsive for
-    forloop:function for_(wh, inc, fct, options, stopCallback) {
+    forLoop:function for_(wh, inc, fct, options, stopCallback) {
       var self = this;
       var timerId;
       
@@ -76,7 +76,7 @@
       
       // If it's an array
       // taken from jQuery
-      if (toString.call(obj) == "[object Array]") {
+      if (Object.prototype.toString.call(obj) == "[object Array]") {
         i = 0;
         return this.forloop(
           function() { return i < obj.length; },
@@ -108,6 +108,8 @@
       if (this.onStop) { this.onStop(); }
     }
   };
+  
+  jsk.forloop = jsk.forLoop; // backward compatibility
 
   // Creates the base namespaces
   if (typeof(window.javascriptKataDotCom) == "undefined") { window.javascriptKataDotCom = {}; }

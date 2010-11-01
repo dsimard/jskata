@@ -33,22 +33,22 @@ $(document).ready(function(){
     var i = 0;
     
     var check = function check() {
-      equal(count, 100);
+      equal(count, 10);
     }
 
-    _.nf.for(
-      function() { return i < 100; },
+    _.nf.forLoop(
+      function() { return i < 11; },
       function() { i++; },
       function fct() {
         count++;
       },
       {},
-      function() {
-        console.log("onstop", count);
-        check();
-        equal(count, 2);
-      }
+      check
     );
+  });
+  
+  test("backward compatibility", function() {
+    equal(jsk.nofreeze.forloop, jsk.nofreeze.forLoop)
   });
 });
 </script>
