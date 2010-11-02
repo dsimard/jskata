@@ -3,5 +3,5 @@
   minifiedExtension : "min",
   debug : true,
   aggregateTo : "./minified/jskata.js",
-  runGCompiler : true,
+  runGCompiler : false,
 }
