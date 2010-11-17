@@ -1,7 +1,8 @@
-{src : "./src",
-  dest : "./minified",
-  minifiedExtension : "min",
+{src : "src/",
+  dest : "minified/",
   debug : true,
-  aggregateTo : "./minified/jskata.js",
+  aggregateTo : "jskata.js",
   runGCompiler : true,
+  runJslint : true,
+  keepCompiled : true,
 }

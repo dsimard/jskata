@@ -1,5 +1,15 @@
 $(document).ready(function() {
 
+  // forloop(wh, inc, fct, options{sleepFor:integer, chunkSize:integer}, stopCallback) returns {stop:function}
+  var i = 0;
+  jsk.nf.forloop(
+    function() { return i < 10; }, 
+    function() { i++; },
+    function() { console.log(i); },
+    null,
+    function() { console.log("Stopped at " + i.toString()) }
+  );
+
   $("#forCount").click(function() {
     jsKata.nofreeze.forCount(1000000, function(i) {
       document.title = i;
