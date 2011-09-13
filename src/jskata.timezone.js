@@ -82,10 +82,10 @@
   };
   
   // Creates the base namespaces
-  if (typeof(window.javascriptKataDotCom) == "undefined") { window.javascriptKataDotCom = {}; }
-  if (typeof(window.jsKata) == "undefined") { window.jsKata = window.javascriptKataDotCom; }
-  if (typeof(window.jsk) == "undefined") { window.jsk = window.javascriptKataDotCom; }
-  if (typeof(window._) == "undefined") { window._ = window.javascriptKataDotCom; }
+  if (window.javascriptKataDotCom === undefined) { window.javascriptKataDotCom = {}; }
+  if (window.jsKata === undefined) { window.jsKata = window.javascriptKataDotCom; }
+  if (window.jsk === undefined) { window.jsk = window.javascriptKataDotCom; }
+  if (window._  === undefined) { window._ = window.javascriptKataDotCom; }
     
   window.javascriptKataDotCom.timezone = jsk; 
   window.javascriptKataDotCom.tz = jsk;
