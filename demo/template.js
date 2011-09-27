@@ -3,6 +3,9 @@ $(document).ready(function() {
       var repo = data.repository;
       console.log(repo);
       
+      
+      var i = 0;
+      
       var tests = [
         function() {
           _.t({
@@ -11,16 +14,20 @@ $(document).ready(function() {
         },
         function() {
           _.t({
-            "#info2" : {
+            id : {
               "<li>" : repo.name
             }
           });
         }
       ];
       
-      for (var i = 0; i < tests.length; i++)  {
+      for (i = 0; i < tests.length; i++)  {
+        var id = "test" + i.toString()
+        var div = $("<div>").attr("id", id)
+        $("#tests").append(div);
+        
         console.group("Test #" + i);
-        tests[i]();
+        //tests[i](id);
         console.groupEnd();
       }
   });
