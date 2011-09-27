@@ -1,9 +1,0 @@
-/*!
- * jskata $VERSION
- * http://jquery.com/
- *
- * Copyright $YEAR, Dan Simard
- * Licensed under GPL Version 2 licenses.
- *
- * Date: $DATE
- */
