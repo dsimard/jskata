@@ -83,6 +83,20 @@ $(document).ready(function(){
     equal(jsk.tz.stToString(), "+0000");
     equal(jsk.tz.stToString(), jsk.tz.dstToString());
   });
+  
+  test("Time separator", function() {
+    jsk.tz.testOffset(300, 240);
+    
+    jsk.tz.timeSeparator = ',';
+    equal(jsk.tz.stToString(':'), "-05:00");
+    equal(jsk.tz.stToString(), "-05,00");
+    
+    jsk.tz.timeSeparator = '';
+    equal(jsk.tz.stToString(), "-0500");
+    
+    jsk.tz.timeSeparator = null;
+    equal(jsk.tz.stToString(), "-0500");
+  });
 });
 </script>
 </body>
