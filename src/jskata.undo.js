@@ -113,6 +113,7 @@
   if (typeof window !== 'undefined') {
     if (window.javascriptKataDotCom === undefined) { window.javascriptKataDotCom = {}; }
     if (window.jsKata === undefined) { window.jsKata = window.javascriptKataDotCom; }
+    if (window.jskata === undefined) { window.jskata = window.javascriptKataDotCom; }
     if (window.jsk === undefined) { window.jsk = window.javascriptKataDotCom; }
     if (window._  === undefined) { window._ = window.javascriptKataDotCom; }
       

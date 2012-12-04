@@ -1,6 +1,6 @@
-# jsKata - independent javascript library
+# jskata - independent javascript library
 
-## jsKata.timezone
+## jskata.timezone
 
 __Returns standard and daylight saving time zones based on the user's browser__
 
@@ -27,28 +27,36 @@ If the timezone has daylight saving time.
 
 **stToString([timeSeparator])**
 
-The standard time offset of the timezone in hour. Example, North America/Eastern Time returns -0500.
+The standard time offset of the timezone in hour.
 
     jsk.tz.stToString() // for North America/Eastern Time
     => -0500
     jsk.tz.stToString()
     => -05:00
+    
+**dstToString([timeSeparator])**
 
+The daylight saving time offset of the timezone in hour.
 
-timeSeparator string : Time separator (":" would return -05:00)
+    jsk.tz.stToString() // for North America/Eastern Time
+    => -0400
 
-dstToString(timeSeparator) : integer
+**timeSeparator**
 
-Returns the daylight saving time offset of the timezone in hour. Example, North America/Eastern Time returns -0400.
-
+Set the default time separator
+    
+    jsk.tz.timeSeparator = ':';
+    jsk.tz.stToString() // for North America/Eastern Time
+    => -05:00
 
 
 ## Namespaces
 
-There are 4 different namespaces to access __jsKata__
+There are 4 different namespaces to access __jskata__
 
 - `JavascriptKataDotCom`
 - `jsKata`
+- `jskata`
 - `jsk`
 - `_` (underscore
 
