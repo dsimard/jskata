@@ -116,13 +116,17 @@
   };
   
   jsk.forloop = jsk.forLoop; // backward compatibility
-
+  
   // Creates the base namespaces
-  if (window.javascriptKataDotCom === undefined) { window.javascriptKataDotCom = {}; }
-  if (window.jsKata === undefined) { window.jsKata = window.javascriptKataDotCom; }
-  if (window.jsk === undefined) { window.jsk = window.javascriptKataDotCom; }
-  if (window._  === undefined) { window._ = window.javascriptKataDotCom; }
-    
-  window.javascriptKataDotCom.nofreeze = jsk; 
-  window.javascriptKataDotCom.nf = window.javascriptKataDotCom.nofreeze;
+  if (typeof window !== 'undefined') {
+    if (window.javascriptKataDotCom === undefined) { window.javascriptKataDotCom = {}; }
+    if (window.jsKata === undefined) { window.jsKata = window.javascriptKataDotCom; }
+    if (window.jsk === undefined) { window.jsk = window.javascriptKataDotCom; }
+    if (window._  === undefined) { window._ = window.javascriptKataDotCom; }
+      
+    window.javascriptKataDotCom.nofreeze = jsk; 
+    window.javascriptKataDotCom.nf = window.javascriptKataDotCom.nofreeze;
+  } else if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = jsk;
+  }
 })();
