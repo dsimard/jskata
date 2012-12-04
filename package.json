@@ -1,6 +1,6 @@
 {
   "author": "dsimard <dsimard@azanka.ca>",
-  "name": "jsKata",
+  "name": "jskata",
   "description": "independent javascript libraries from JavascriptKata.com",
   "keywords": ["timezone", "date"],
   "version": "0.4.0",
