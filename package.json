@@ -1,0 +1,26 @@
+{
+  "author": "dsimard <dsimard@azanka.ca>",
+  "name": "jsKata",
+  "description": "independent javascript libraries from JavascriptKata.com",
+  "keywords": ["timezone", "date"],
+  "version": "0.4.0",
+  "preferGlobal": "false",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dsimard/jskata.git"
+  },
+  "scripts": {
+    "test": "node ./node_modules/.bin/mocha --compilers coffee:coffee-script test/*.coffee",
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "mocha"   : "~1.0.3",
+    "should"  : "~0.6.3",
+    "coffee-script" : "latest"
+  },
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
