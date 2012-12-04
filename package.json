@@ -17,7 +17,6 @@
     "should"  : "~0.6.3",
     "coffee-script" : "latest"
   },
-  "optionalDependencies": {},
   "engines": {
     "node": "*"
   }
