@@ -70,7 +70,7 @@
     stToString : function(timeSeparator) {
       return jsk.offsetToString(jsk.st(), timeSeparator);
     },
-    // Returns the standard time offset
+    // Returns the daylight saving time offset
     dst : function dst() {
       return 0-jsk.invertedDst();
     },
@@ -79,6 +79,16 @@
       return jsk.offsetToString(jsk.dst(), timeSeparator);
     }
   };
+  
+  // Aliases
+  jsk.hasDaylightSavingTime = jsk.hasDst;
+  jsk.hasDaylightSaving = jsk.hasDst;
+  jsk.standardTime = jsk.st;
+  jsk.standardTimeToString = jsk.stToString;
+  jsk.daylightSaving = jsk.dst;
+  jsk.daylightSavingTime = jsk.dst;
+  jsk.daylightSavingToString = jsk.dstToString;
+  jsk.daylightSavingTimeToString = jsk.dstToString;
   
   // Creates the base namespaces
   if (typeof window !== 'undefined') {

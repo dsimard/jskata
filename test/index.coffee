@@ -56,7 +56,7 @@ describe 'Timezone', ->
     equal(jsk.tz.stToString(), "+0000");
   
   
-  it "Africa - Ouagadougou - hi to my ex-coworker Yaya!", ->
+  it "Africa - Ouagadougou", ->
     jsk.tz.testOffset(0, 0);
     ok(!jsk.tz.hasDst());
     ok(jsk.tz.st() == jsk.tz.dst());
@@ -76,4 +76,14 @@ describe 'Timezone', ->
     
     jsk.tz.timeSeparator = null;
     equal(jsk.tz.stToString(), "-0500");
+    
+  it 'defines aliases', ->
+    tz.hasDst.should.equal tz.hasDaylightSavingTime
+    tz.hasDst.should.equal tz.hasDaylightSaving
+    tz.st.should.equal tz.standardTime
+    tz.stToString.should.equal tz.standardTimeToString
+    tz.dst.should.equal tz.daylightSavingTime
+    tz.dst.should.equal tz.daylightSaving
+    tz.dstToString.should.equal tz.daylightSavingToString
+    tz.dstToString.should.equal tz.daylightSavingTimeToString
   

@@ -1,42 +1,42 @@
 # jskata.timezone
 
-##standard and daylight saving time zones
+## standard time, daylight saving time in time zones
 
-**st()**
+**standardTime()** alias `st`
 
 The standard time offset of the timezone in seconds. 
 
-    jsk.tz.st() // for North America/Eastern Time
+    jsk.tz.standardTime() // for North America/Eastern Time
     => -300
     
-**dst()**
+**daylightSavingTime()** alias `dst`
 
 The daylight saving time offset of the timezone in seconds. 
 
-    jsk.tz.dst() // for North America/Eastern Time
+    jsk.tz.daylightSavingTime() // for North America/Eastern Time
     => -240
 
-**hasDst()**
+**hasDaylightSavingTime()** alias `hasDst`, `hasDaylightSaving`
 
 If the timezone has daylight saving time.
 
-    jsk.tz.hasDst()
+    jsk.tz.hasDaylightSavingTime()
     => true
 
-**stToString([timeSeparator])**
+**standardTimeToString([timeSeparator])** alias `stToString`
 
 The standard time offset of the timezone in hour.
 
-    jsk.tz.stToString() // for North America/Eastern Time
+    jsk.tz.standardTimeToString() // for North America/Eastern Time
     => -0500
     jsk.tz.stToString()
     => -05:00
     
-**dstToString([timeSeparator])**
+**daylightSavingTimeToString([timeSeparator])** alias `dstToString`, `daylightSavingToString`
 
 The daylight saving time offset of the timezone in hour.
 
-    jsk.tz.stToString() // for North America/Eastern Time
+    jsk.tz.dstToString() // for North America/Eastern Time
     => -0400
 
 **timeSeparator**
