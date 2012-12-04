@@ -1,8 +1,6 @@
 # jskata - independent javascript library
 
-## jskata.timezone
-
-__Returns standard and daylight saving time zones based on the user's browser__
+## jskata.timezone :  standard and daylight saving time zones
 
 **st()**
 
