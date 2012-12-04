@@ -12,8 +12,6 @@
   "scripts": {
     "test": "node ./node_modules/.bin/mocha --compilers coffee:coffee-script test/*.coffee",
   },
-  "dependencies": {
-  },
   "devDependencies": {
     "mocha"   : "~1.0.3",
     "should"  : "~0.6.3",
