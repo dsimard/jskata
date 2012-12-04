@@ -2,6 +2,12 @@
 
 [![Build Status](https://secure.travis-ci.org/dsimard/jskata.png?branch=2012-12-02_Node)](https://travis-ci.org/dsimard/jskata)
 
+## Modules
+
+### timezone
+
+This module
+
 ## Namespaces
 
 There are 4 different namespaces to access __jskata__

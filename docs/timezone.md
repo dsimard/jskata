@@ -9,6 +9,13 @@ The standard time offset of the timezone in seconds.
     jsk.tz.standardTime() // for North America/Eastern Time
     => -300
     
+**isStandardTime([date])** alias `isSt`
+
+If a date is at standard time (`now` is used if no `date` is specified)
+
+    jsk.tz.isStandardTime(new Date(2012, 1, 1)) // for North America/Eastern Time
+    => true
+    
 **daylightSavingTime()** alias `dst`
 
 The daylight saving time offset of the timezone in seconds. 
@@ -22,6 +29,13 @@ If the timezone has daylight saving time.
 
     jsk.tz.hasDaylightSavingTime()
     => true
+    
+**isDaylightSavingTime([date])** alias `isSt`
+
+If a date is at daylight saving time (`now` is used if no `date` is specified)
+
+    jsk.tz.isStandardTime(new Date(2012, 1, 1)) // for North America/Eastern Time
+    => false
 
 **standardTimeToString([timeSeparator])** alias `stToString`
 

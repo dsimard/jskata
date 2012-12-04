@@ -77,6 +77,16 @@
     // Returns daylight saving to string
     dstToString : function(timeSeparator) {
       return jsk.offsetToString(jsk.dst(), timeSeparator);
+    },
+    // If a date is in standard time (default date is now)
+    isSt : function isSt(date) {
+      date = date || new Date();
+      return date.getTimezoneOffset() == jsk.invertedSt();
+    },
+    // If a date is in daylight saving time (default date is now)
+    isDst : function isSt(date) {
+      date = date || new Date();
+      return jsk.hasDst() && date.getTimezoneOffset() == jsk.invertedDst();
     }
   };
   
@@ -89,6 +99,8 @@
   jsk.daylightSavingTime = jsk.dst;
   jsk.daylightSavingToString = jsk.dstToString;
   jsk.daylightSavingTimeToString = jsk.dstToString;
+  jsk.isStandardTime = jsk.isSt;
+  jsk.isDaylightSavingTime = jsk.isDst;
   
   // Creates the base namespaces
   if (typeof window !== 'undefined') {
