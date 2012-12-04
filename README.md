@@ -4,6 +4,43 @@
 
 __Returns standard and daylight saving time zones based on the user's browser__
 
+**st()**
+
+The standard time offset of the timezone in seconds. 
+
+    jsk.tz.st() // for North America/Eastern Time
+    => -300
+    
+**dst()**
+
+The daylight saving time offset of the timezone in seconds. 
+
+    jsk.tz.dst() // for North America/Eastern Time
+    => -240
+
+**hasDst()**
+
+If the timezone has daylight saving time.
+
+    jsk.tz.hasDst()
+    => true
+
+**stToString([timeSeparator])**
+
+The standard time offset of the timezone in hour. Example, North America/Eastern Time returns -0500.
+
+    jsk.tz.stToString() // for North America/Eastern Time
+    => -0500
+    jsk.tz.stToString()
+    => -05:00
+
+
+timeSeparator string : Time separator (":" would return -05:00)
+
+dstToString(timeSeparator) : integer
+
+Returns the daylight saving time offset of the timezone in hour. Example, North America/Eastern Time returns -0400.
+
 
 
 ## Namespaces
