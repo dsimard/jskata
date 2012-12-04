@@ -10,7 +10,7 @@
     "url": "git@github.com:dsimard/jskata.git"
   },
   "scripts": {
-    "test": "node ./node_modules/.bin/mocha --compilers coffee:coffee-script test/*.coffee",
+    "test": "node ./node_modules/.bin/mocha --compilers coffee:coffee-script test/*.coffee"
   },
   "devDependencies": {
     "mocha"   : "~1.0.3",
