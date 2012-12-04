@@ -79,14 +79,16 @@
       return jsk.offsetToString(jsk.dst(), timeSeparator);
     },
     // If a date is in standard time (default date is now)
-    isSt : function isSt(date) {
+    isSt : function isSt(date, testOffset) {
       date = date || new Date();
-      return date.getTimezoneOffset() == jsk.invertedSt();
+      var offset = testOffset || date.getTimezoneOffset();
+      return offset == jsk.invertedSt();
     },
     // If a date is in daylight saving time (default date is now)
-    isDst : function isSt(date) {
+    isDst : function isSt(date, testOffset) {
       date = date || new Date();
-      return jsk.hasDst() && date.getTimezoneOffset() == jsk.invertedDst();
+      var offset = testOffset || date.getTimezoneOffset();
+      return jsk.hasDst() && offset == jsk.invertedDst();
     }
   };
   

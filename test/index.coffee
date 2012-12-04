@@ -90,16 +90,14 @@ describe 'Timezone', ->
     tz.isDst.should.equal tz.isDaylightSavingTime
     
   it 'returns if a date is standard time', ->
-    jsk.tz.testOffset(300, 240)    
-    jsk.tz.isSt(new Date(2012, 1, 1)).should.be.true
-    jsk.tz.isSt(new Date(2012, 7, 1)).should.be.false
+    jsk.tz.isSt(new Date(2012, 1, 1), 300).should.be.true
+    jsk.tz.isSt(new Date(2012, 7, 1), 240).should.be.false
     
   it 'returns if a date is daylight saving time', ->
-    jsk.tz.testOffset(300, 240)    
-    jsk.tz.isDst(new Date(2012, 1, 1)).should.be.false
-    jsk.tz.isDst(new Date(2012, 7, 1)).should.be.true
+    jsk.tz.isDst(new Date(2012, 1, 1), 300).should.be.false
+    jsk.tz.isDst(new Date(2012, 7, 1), 240).should.be.true
     
   it "is not dst if no dst", ->
     jsk.tz.testOffset(0, 0);
-    jsk.tz.isDst(new Date(2012, 1, 1)).should.be.false
-    jsk.tz.isDst(new Date(2012, 7, 1)).should.be.false
+    jsk.tz.isDst(new Date(2012, 1, 1), 0).should.be.false
+    jsk.tz.isDst(new Date(2012, 7, 1), 0).should.be.false
