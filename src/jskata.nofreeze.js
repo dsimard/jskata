@@ -89,7 +89,13 @@
       } else {
         // Create an array of properties
         var props = [];
-        for(var prop in obj) {props.push(prop); }
+        
+        for(var prop in obj) { 
+          if (true) { // for jshint
+            props.push(prop); 
+          }
+        }
+        
         i = 0;
         return this.forloop(
           function() { return i < props.length; },
