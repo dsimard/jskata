@@ -77,8 +77,7 @@
     // Returns daylight saving to string
     dstToString : function(timeSeparator) {
       return jsk.offsetToString(jsk.dst(), timeSeparator);
-    },
-    iHateTheLastComma : true // this line exists because I hate the last comma
+    }
   };
   
   // Creates the base namespaces

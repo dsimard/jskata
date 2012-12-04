@@ -1,59 +1,12 @@
 # jskata - independent javascript library
 
-## jskata.timezone :  standard and daylight saving time zones
-
-**st()**
-
-The standard time offset of the timezone in seconds. 
-
-    jsk.tz.st() // for North America/Eastern Time
-    => -300
-    
-**dst()**
-
-The daylight saving time offset of the timezone in seconds. 
-
-    jsk.tz.dst() // for North America/Eastern Time
-    => -240
-
-**hasDst()**
-
-If the timezone has daylight saving time.
-
-    jsk.tz.hasDst()
-    => true
-
-**stToString([timeSeparator])**
-
-The standard time offset of the timezone in hour.
-
-    jsk.tz.stToString() // for North America/Eastern Time
-    => -0500
-    jsk.tz.stToString()
-    => -05:00
-    
-**dstToString([timeSeparator])**
-
-The daylight saving time offset of the timezone in hour.
-
-    jsk.tz.stToString() // for North America/Eastern Time
-    => -0400
-
-**timeSeparator**
-
-Set the default time separator
-    
-    jsk.tz.timeSeparator = ':';
-    jsk.tz.stToString() // for North America/Eastern Time
-    => -05:00
-
+[![Build Status](https://secure.travis-ci.org/dsimard/jskata.png?branch=2012-12-02_Node)](https://travis-ci.org/dsimard/jskata)
 
 ## Namespaces
 
 There are 4 different namespaces to access __jskata__
 
 - `JavascriptKataDotCom`
-- `jsKata`
 - `jskata`
 - `jsk`
 - `_` (underscore
