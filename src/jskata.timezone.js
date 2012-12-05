@@ -1,18 +1,121 @@
-/* http://upload.wikimedia.org/wikipedia/commons/0/01/2007-02-20_time_zones.svg */
-/* 
-  In the northern emisphere, january is in winter and july is in summer.
-  In the southern emisphere, january is in summer and july is in winter.
-  A daylight saving time offset is always -1, so standard time is always 
-  the greatest of two offsets.
-*/
+// ## Standard time, daylight saving time in time zones
 (function() {
   var jsk = {
-    /******* PROPERTIES *******/
+
     breakingMonth : 0,
     testMonth0Offset : null,
     testMonth6Offset : null,
+    /*
+     * ### timeSeparator
+     *
+     * Set the default time separator
+     *
+     *      jsk.tz.timeSeparator = ':';
+     *      jsk.tz.stToString()
+     *      => -05:00
+    */
     timeSepator : "",
-    /******* PRIVATE *******/
+    
+    /*
+     * ### standardTime()
+     * alias `st`
+     *
+     * The standard time offset of the timezone in seconds. 
+     *
+     *      jsk.tz.standardTime() // for North America/Eastern Time
+     *      => -300
+    */
+    st : function st() {
+      return 0-jsk.invertedSt();
+    },
+    /*
+     * ### isStandardTime([date])
+     * alias `isSt`
+     *
+     * If a date is at standard time (`now` is used if no `date` is specified)
+     *
+     *      jsk.tz.isStandardTime(new Date(2012, 1, 1)) // for North America/Eastern Time
+     *      => true
+    */
+    isSt : function isSt(date, testOffset) {
+      date = date || new Date();
+      var offset = testOffset || date.getTimezoneOffset();
+      return offset == jsk.invertedSt();
+    },
+    /*
+     * ### standardTimeToString([timeSeparator])
+     * alias `stToString`
+     *
+     * The standard time offset of the timezone in hour (ex : -0500)
+     *
+     *      jsk.tz.standardTimeToString() // for North America/Eastern Time
+     *      => -0500
+     *      jsk.tz.stToString(':')
+     *      => -05:00
+    */
+    stToString : function(timeSeparator) {
+      return jsk.offsetToString(jsk.st(), timeSeparator);
+    },
+    /*
+     * ### daylightSavingTime()
+     * alias `dst`
+     *
+     * The daylight saving time offset of the timezone in seconds. 
+     *
+     *      jsk.tz.daylightSavingTime() // for North America/Eastern Time
+     *      => -240
+    */
+    dst : function dst() {
+      return 0-jsk.invertedDst();
+    },
+    
+    /*
+     * ### hasDaylightSavingTime()
+     * alias `hasDst`, `hasDaylightSaving`
+     *
+     * If the timezone has daylight saving time.
+     *
+     *      jsk.tz.hasDaylightSavingTime()
+     *      => true
+    */
+    hasDst : function() {
+      return jsk.st() != jsk.dst();
+    },
+    /*
+     * ### isDaylightSavingTime([date])
+     * alias `isDst`
+     *
+     * If a date is at daylight saving time (`now` is used if no `date` is specified)
+     *
+     *      jsk.tz.isStandardTime(new Date(2012, 1, 1)) // for North America/Eastern Time
+     *      => false
+    */
+    isDst : function isSt(date, testOffset) {
+      date = date || new Date();
+      var offset = testOffset || date.getTimezoneOffset();
+      return jsk.hasDst() && offset == jsk.invertedDst();
+    },
+    /*
+     * ### daylightSavingTimeToString([timeSeparator])
+     * alias `dstToString`, `daylightSavingToString`
+     *
+     * The daylight saving time offset of the timezone in hour.
+     *
+     *      jsk.tz.dstToString() // for North America/Eastern Time
+     *      => -0400
+    */
+    dstToString : function(timeSeparator) {
+      return jsk.offsetToString(jsk.dst(), timeSeparator);
+    },
+    /******************************************/
+    // Returns the standard time offset (inverted)
+    invertedSt : function invertedSt() {
+      return Math.max(jsk.getMonth0Offset(), jsk.getMonth6Offset());
+    },
+    // Returns the daylight saving time offset (inverted)
+    invertedDst : function invertedDst() {
+      return Math.min(jsk.getMonth0Offset(), jsk.getMonth6Offset());
+    },
     getDateOffset : function getDate(month) {
       return new Date((new Date()).getFullYear(), month, 0).getTimezoneOffset();
     },
@@ -44,55 +147,14 @@
       
       return parts.join("");
     },
-    /******* PUBLIC *******/
     // Force some test offsets
     testOffset : function testOffset(month0Offset, month6Offset) {
       jsk.testMonth0Offset = month0Offset;
       jsk.testMonth6Offset = month6Offset;
-    },
-    // the timezone has daylight saving
-    hasDst : function() {
-      return jsk.st() != jsk.dst();
-    },
-    // Returns the standard time offset (inverted)
-    invertedSt : function invertedSt() {
-      return Math.max(jsk.getMonth0Offset(), jsk.getMonth6Offset());
-    },
-    // Returns the daylight saving time offset (inverted)
-    invertedDst : function invertedDst() {
-      return Math.min(jsk.getMonth0Offset(), jsk.getMonth6Offset());
-    },
-    // Returns the standard time offset
-    st : function st() {
-      return 0-jsk.invertedSt();
-    },
-    // Returns standard to string
-    stToString : function(timeSeparator) {
-      return jsk.offsetToString(jsk.st(), timeSeparator);
-    },
-    // Returns the daylight saving time offset
-    dst : function dst() {
-      return 0-jsk.invertedDst();
-    },
-    // Returns daylight saving to string
-    dstToString : function(timeSeparator) {
-      return jsk.offsetToString(jsk.dst(), timeSeparator);
-    },
-    // If a date is in standard time (default date is now)
-    isSt : function isSt(date, testOffset) {
-      date = date || new Date();
-      var offset = testOffset || date.getTimezoneOffset();
-      return offset == jsk.invertedSt();
-    },
-    // If a date is in daylight saving time (default date is now)
-    isDst : function isSt(date, testOffset) {
-      date = date || new Date();
-      var offset = testOffset || date.getTimezoneOffset();
-      return jsk.hasDst() && offset == jsk.invertedDst();
     }
   };
   
-  // Aliases
+  // Assign aliases
   jsk.hasDaylightSavingTime = jsk.hasDst;
   jsk.hasDaylightSaving = jsk.hasDst;
   jsk.standardTime = jsk.st;
@@ -118,3 +180,11 @@
     module.exports = jsk;
   }
 })();
+
+/* http://upload.wikimedia.org/wikipedia/commons/0/01/2007-02-20_time_zones.svg */
+/* 
+  In the northern emisphere, january is in winter and july is in summer.
+  In the southern emisphere, january is in summer and july is in winter.
+  A daylight saving time offset is always -1, so standard time is always 
+  the greatest of two offsets.
+*/

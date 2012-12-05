@@ -1,3 +1,5 @@
 ##Documentation
 
-[jskata.timezone](timezone.md)
+[jskata.timezone](src/jskata.timezone.js.html)
+
+

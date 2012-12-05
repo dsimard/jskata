@@ -38,6 +38,16 @@
     <h2>For count</h2>
     <button id="forCount">For count</button>
   </p>
+  <script>
+    if (jsk.tz.hasDaylightSavingTime()) {
+      console.log('You have daylight saving time in your timezone');
+    } else {
+      console.log('You DO NOT have daylight saving time in your timezone');
+    }
+
+    console.log('Your standard time zone offset in second is ' + jsk.tz.standardTime());
+    console.log('Your standard time zone offset is : ' + jsk.tz.standardTimeToString());
+  </script>
 </body>
 </html>
 
