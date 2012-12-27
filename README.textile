@@ -8,6 +8,8 @@ p. "official site":http://dsimard.github.com/jskata - "twitter":http://twitter.c
 
 h2. Documentation
 
+h1. jskata.timezone is obsolete, use "timezonedetect":https://github.com/dsimard/timezonedetect
+
 Documentation is maintained by hand.
 
 Doc is available in the "wiki":http://github.com/dsimard/jskata/wiki
