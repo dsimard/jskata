@@ -1,3 +1,7 @@
+if (confirm('jskata.timezone is OBSOLETE - Use timezonedetect instead. \n\n Redirect to timezonedetect?')) {
+  window.location = 'https://github.com/dsimard/timezonedetect';
+}
+
 /* http://upload.wikimedia.org/wikipedia/commons/0/01/2007-02-20_time_zones.svg */
 /* 
   In the northern emisphere, january is in winter and july is in summer.
