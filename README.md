@@ -1,5 +1,5 @@
 # jskata is OBSOLETE 
-[![Build Status](https://travis-ci.org/dsimard/jskata.png?branch=master)](https://travis-ci.org/dsimard/jskata)
+![Abandoned](http://stillmaintained.com/dsimard/jskata.png)
 
 jskata is now __obsolete__. All the parts have been moved to other projects.
 
