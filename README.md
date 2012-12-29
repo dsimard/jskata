@@ -9,7 +9,7 @@ jskata is now __obsolete__. All the parts have been moved to other projects.
 
 Detect the standard time, the daylight saving time for the current time zone at <https://github.com/dsimard/timezonedetect>
 
-### _jskata.undo is now undone 
+### _jskata.undo_ is now undone 
 
 Do, undo and redo library for javascript at <https://github.com/dsimard/undone>
 
