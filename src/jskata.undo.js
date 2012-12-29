@@ -1,3 +1,7 @@
+if (confirm('jskata.undo is OBSOLETE - Use undone instead. \n\n Redirect to undone?')) {
+  window.location = 'https://github.com/dsimard/undone';
+}
+
 (function() {
   var jsk = {
     ///// PROPERTIES
