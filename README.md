@@ -1,15 +1,13 @@
-# jskata
+# jskata is OBSOLETE 
 [![Build Status](https://travis-ci.org/dsimard/jskata.png?branch=master)](https://travis-ci.org/dsimard/jskata)
-
-## OBSOLETE
 
 jskata is now __obsolete__. All the parts have been moved to other projects.
 
-### _jskata.timezone_ is now timezonedetect 
+## _jskata.timezone_ is now [timezonedetect](https://github.com/dsimard/timezonedetect)
 
 Detect the standard time, the daylight saving time for the current time zone at <https://github.com/dsimard/timezonedetect>
 
-### _jskata.undo_ is now undone 
+## _jskata.undo_ is now [undone](https://github.com/dsimard/undone)
 
 Do, undo and redo library for javascript at <https://github.com/dsimard/undone>
 
