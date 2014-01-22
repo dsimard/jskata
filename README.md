@@ -12,7 +12,7 @@ Do, undo and redo library for javascript at <https://github.com/dsimard/undone>
 
 __jskata.nofreeze__ is still in jskata but is not a really interesting project anyway.
 
-## Why obsolete?
+## Why is it splitted?
 
 I wanted _jskata_ to be a suite of javascript libraries but I finally tear them apart because :
 
