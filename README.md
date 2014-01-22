@@ -1,7 +1,6 @@
-# jskata is OBSOLETE 
-![Abandoned](http://stillmaintained.com/dsimard/jskata.png)
+# jskata is SPLITTED in 3 projects
 
-jskata is now __obsolete__. All the parts have been moved to other projects.
+jskata is now __splitted__. All the parts have been moved to other projects.
 
 ## _jskata.timezone_ is now [timezonedetect](https://github.com/dsimard/timezonedetect)
 
